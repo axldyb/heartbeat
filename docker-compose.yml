@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: "3"
+services:
+  postgres:
+    image: postgres:11.2-alpine
+    ports:
+      - "5432:5432"
+    # env_file:
+    #   - ./database/database.env
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: heartbeat
+
+  server:
+    build:
+      context: ./
+      dockerfile: ./server/Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - "9090:9090"
+      - "9229:9229"
+
+  client:
+    build:
+      context: ./
+      dockerfile: ./client/Dockerfile
+    depends_on:
+      - server
+    ports:
+      - "8080:3000"

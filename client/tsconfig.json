@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6",
+      "dom"
+    ],
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "target": "es6",
+    "resolveJsonModule": true, // allow json files to be imported
+    "strictNullChecks": true
+  },
+  "compileOnSave": true,
+  "include": [
+    "src",
+  ]
+}

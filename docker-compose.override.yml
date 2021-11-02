@@ -1,0 +1,9 @@
+
+# docker-compose.override.yml
+version: "3"
+services:
+  server:
+    env_file: ./server/.env
+    volumes:
+      - ./server/:./server/
+      - /server/node_modules
