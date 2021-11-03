@@ -1,0 +1,56 @@
+syntax = "proto3";
+package heartbeat;
+
+import "google/protobuf/timestamp.proto";
+
+// service definition
+
+service HeartbeatService {
+  rpc listHeartbeats(Empty) returns (HeartbeatList) {}
+  rpc readHeartbeat(HeartbeatId) returns (Heartbeat) {}
+  rpc createHeartbeat(newHeartbeat) returns (result) {}
+  // TODO: get stream of heartbeats
+}
+
+// message type definitions
+
+message Empty {}
+
+message HeartbeatList {
+  repeated Heartbeat heartbeats = 1;
+}
+
+message HeartbeatId {
+  int32 id = 1;
+}
+
+message Heartbeat {
+  int32 id = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  HeartbeatClient client = 3;
+  HeartbeatDevice device = 4;
+}
+
+message HeartbeatClient {
+  string id = 1;
+  string name = 2;
+  string version = 3;
+}
+
+message HeartbeatDevice {
+  string id = 1;
+  string name = 2;
+  string os = 3;
+  string osVersion = 4;
+  string model = 5;
+  string language = 6;
+}
+
+message newHeartbeat {
+  HeartbeatClient client = 1;
+  HeartbeatDevice device = 2;
+}
+
+message result {
+  string status = 1;
+}

@@ -1,6 +1,6 @@
 import * as express from 'express'
 import * as bodyParser from 'body-parser'
-import { productRouter } from './routes/product'
+import { heartbeatsRouter } from './routes/heartbeats'
 import { RouteLoggerMiddleware } from './utils/route-logger-middleware'
 
 const routeLogger = new RouteLoggerMiddleware()
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // routes
-app.use('/api', productRouter)
+app.use('/api', heartbeatsRouter)
 
 // run server
 app.listen(3000, () => {
