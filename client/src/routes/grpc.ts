@@ -27,7 +27,7 @@ const readHeartbeat = (req: Request, res: Response) => {
     client.readHeartbeat(payload, (err, result) => {
         if (err) {
             console.error(err)
-            res.json('That heartbeat does not exist.')
+            res.json(err)
         } else {
             res.json(result)
         }
@@ -38,7 +38,7 @@ const createHeartbeat = (req: Request, res: Response) => {
     client.createHeartbeat(payload, (err, result) => {
         if (err) {
             console.error(err)
-            res.json('Could not create heartbeat.')
+            res.json(err)
         } else {
             res.json(result)
         }
