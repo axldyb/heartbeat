@@ -16,13 +16,21 @@ export class ServiceHandler {
         this.database = database
     }
 
-    public createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
+    public async createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
         if (call.request) {
             console.log(`(server) create heartbeat: ${JSON.stringify(call.request, null, 2)}`)
         }
-        callback(null, {
-            status: 'OK',
-        })
+
+        try {
+            const success = await this.database.createHeartbeat(call.request)
+            if (success) {
+                callback(null, { status: 'OK' })
+            } else {
+                callback(new Error(`Unable to create heartbeat: ${call.request}`), null)
+            }
+        } catch (err) {
+            callback(new Error('Unable to create heartbeat: ' + err), null)
+        }
     }
 
     public async listHeartbeats(call: ServerUnaryCall<Empty, HeartbeatList>, callback: sendUnaryData<HeartbeatList>) {
@@ -37,10 +45,20 @@ export class ServiceHandler {
         }
     }
 
-    public readHeartbeat(call: ServerUnaryCall<HeartbeatId, Heartbeat>, callback: sendUnaryData<Heartbeat>) {
+    public async readHeartbeat(call: ServerUnaryCall<HeartbeatId, Heartbeat>, callback: sendUnaryData<Heartbeat>) {
         if (call.request) {
             console.log(`(server) read heartbeat: ${JSON.stringify(call.request, null, 2)}`)
         }
-        callback(null, {})
+
+        try {
+            const heartbeat = await this.database.getHeartbeat(call.request)
+            if (heartbeat) {
+                callback(null, heartbeat)
+            } else {
+                callback(new Error(`Heartbeat with ID ${call.request.id} not found`), null)
+            }
+        } catch (err) {
+            callback(new Error(`Unable to read heartbeat with ID ${call.request.id}: ${err}`), null)
+        }
     }
 }

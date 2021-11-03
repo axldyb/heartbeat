@@ -2,9 +2,8 @@ import * as path from 'path'
 import * as knex from 'knex'
 import { Heartbeat } from '../proto/heartbeat/Heartbeat'
 import { Timestamp } from 'google-protobuf/google/protobuf/timestamp_pb'
-// import * as knexConfig from '../knexfile'
-
-// const knexConfig = require('../')
+import { HeartbeatId } from '../proto/heartbeat/HeartbeatId'
+import { newHeartbeat } from '../proto/heartbeat/newHeartbeat'
 
 const knexConfig = {
     development: {
@@ -39,9 +38,11 @@ export enum TableName {
 
 export interface DatabaseManager {
     getHeartbeats(): Promise<Heartbeat[]>
+    getHeartbeat(id: HeartbeatId): Promise<Heartbeat | null>
+    createHeartbeat(newHeartbeat: newHeartbeat): Promise<boolean>
 }
 
-export class DatabaseService {
+export class DatabaseService implements DatabaseManager {
 
     private databaseClient: knex
 
@@ -53,6 +54,47 @@ export class DatabaseService {
     public async getHeartbeats(): Promise<Heartbeat[]> {
         const heartbeats = await this.databaseClient(TableName.heartbeats)
         return heartbeats.map(this.mapDBObjectToHeartbeat)
+    }
+
+    // TODO: Use result type with error handling...
+    public async getHeartbeat(heartbeatId: HeartbeatId): Promise<Heartbeat | null> {
+        if (!heartbeatId.id) {
+            console.error(`Invalid heartbeat id provided: ${heartbeatId}`)
+            return null
+        }
+
+        const data = await this.databaseClient(TableName.heartbeats).where({ id: heartbeatId.id })
+        if (data.length) {
+            const heartbeat = this.mapDBObjectToHeartbeat(data[0])
+            return heartbeat
+        } else {
+            console.log(`Heartbeat with ID ${heartbeatId.id} does not exist`)
+            return null
+        }
+    }
+
+    public async createHeartbeat(newHeartbeat: newHeartbeat): Promise<boolean> {
+        if (!newHeartbeat) {
+            console.error(`Invalid heartbeat provided: ${newHeartbeat}`)
+            return false
+        }
+
+        const data = {
+            client_id: newHeartbeat.client?.id || 'MISSING_VALUE',
+            client_name: newHeartbeat.client?.name || 'MISSING_VALUE',
+            client_version: newHeartbeat.client?.version || 'MISSING_VALUE',
+            device_id: newHeartbeat.device?.id || 'MISSING_VALUE',
+            device_name: newHeartbeat.device?.name || 'MISSING_VALUE',
+            device_os: newHeartbeat.device?.os || 'MISSING_VALUE',
+            device_os_version: newHeartbeat.device?.osVersion || 'MISSING_VALUE',
+            device_model: newHeartbeat.device?.model || 'MISSING_VALUE',
+            device_language: newHeartbeat.device?.language || 'MISSING_VALUE'
+        }
+
+        console.log('data: ' + JSON.stringify(data, null, 2))
+
+        await this.databaseClient(TableName.heartbeats).insert(data)
+        return true
     }
 
     private mapDBObjectToHeartbeat(dbObject: any): Heartbeat {

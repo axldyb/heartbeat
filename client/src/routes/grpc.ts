@@ -18,16 +18,31 @@ const client = getClient()
 const listHeartbeats = (req: Request, res: Response) => {
     console.log('list heartbeats')
     client.listHeartbeats({}, (err, result) => {
-        console.log('heartbeats: ' + JSON.stringify(result, null, 2))
-        console.log('heartbeats: ' + JSON.stringify(err, null, 2))
         res.json(result)
     })
 }
 const readHeartbeat = (req: Request, res: Response) => {
-    res.json({ status: 'not implemented' })
+    const payload = { id: parseInt(req.params.id) }
+
+    client.readHeartbeat(payload, (err, result) => {
+        if (err) {
+            console.error(err)
+            res.json('That heartbeat does not exist.')
+        } else {
+            res.json(result)
+        }
+    })
 }
 const createHeartbeat = (req: Request, res: Response) => {
-    res.json({ status: 'not implemented' })
+    const payload = { client: req.body.client, device: req.body.device }
+    client.createHeartbeat(payload, (err, result) => {
+        if (err) {
+            console.error(err)
+            res.json('Could not create heartbeat.')
+        } else {
+            res.json(result)
+        }
+    })
 }
 
 export {
