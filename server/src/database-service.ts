@@ -59,7 +59,7 @@ export class DatabaseService implements DatabaseManager {
     // TODO: Use result type with error handling...
     public async getHeartbeat(heartbeatId: HeartbeatId): Promise<Heartbeat | null> {
         if (!heartbeatId.id) {
-            console.error(`Invalid heartbeat id provided: ${heartbeatId}`)
+            console.error(`Invalid heartbeat id provided: ${JSON.stringify(heartbeatId, null, 2)}`)
             return null
         }
 
@@ -75,7 +75,7 @@ export class DatabaseService implements DatabaseManager {
 
     public async createHeartbeat(newHeartbeat: newHeartbeat): Promise<boolean> {
         if (!newHeartbeat) {
-            console.error(`Invalid heartbeat provided: ${newHeartbeat}`)
+            console.error(`Invalid heartbeat provided: ${JSON.stringify(newHeartbeat, null, 2)}`)
             return false
         }
 

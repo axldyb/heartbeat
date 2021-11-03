@@ -10,10 +10,12 @@ import { Heartbeat } from '../proto/heartbeat/Heartbeat'
 import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
+import { SchemaValidator } from './schema-validator'
 
 const environment = process.env.ENVIRONMENT || 'development' as Environment
 const database = new DatabaseService(Environment.development)
-const serviceHandler = new ServiceHandler(database)
+const schemaValidator = new SchemaValidator()
+const serviceHandler = new ServiceHandler(database, schemaValidator)
 
 const handlers: HeartbeatServiceHandlers = {
     createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
