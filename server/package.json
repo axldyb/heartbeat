@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "concurrently -k \"npm run build:watch\" \"npm run start:dev\"",
         "start": "node dist/src/index.js",
-        "start:dev": "nodemon -L --inspect=0.0.0.0:9229 dist/src/index.js",
+        "start:dev": "nodemon src/index.ts",
         "build": "tsc",
         "build:watch": "tsc -w",
         "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,6 +30,7 @@
     },
     "devDependencies": {
         "concurrently": "^4.1.0",
-        "nodemon": "^1.18.11"
+        "nodemon": "^1.18.11",
+        "ts-node": "^10.4.0"
     }
 }

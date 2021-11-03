@@ -21,6 +21,9 @@ services:
     ports:
       - "9090:9090"
       - "9229:9229"
+    volumes:
+      - ./server/src:/server/src
+      - ./server/nodemon.json:/server/nodemon.json
 
   client:
     build:
