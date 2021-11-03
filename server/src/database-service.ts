@@ -56,19 +56,13 @@ export class DatabaseService {
     }
 
     private mapDBObjectToHeartbeat(dbObject: any): Heartbeat {
-        console.log('dbObject: ' + JSON.stringify(dbObject, null, 2))
-
         const date = new Date(dbObject.timestamp)
-        console.log('date: ' + date)
-
         const timestamp = new Timestamp()
         timestamp.fromDate(date)
 
-        console.log('timestamp: ' + timestamp)
-
         const heartbeat: Heartbeat = {
             id: dbObject.id,
-            timestamp: timestamp,
+            timestamp: timestamp.toObject(),
             client: {
                 id: dbObject.client_id,
                 name: dbObject.client_name,
