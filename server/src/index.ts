@@ -10,7 +10,7 @@ import { Heartbeat } from '../proto/heartbeat/Heartbeat'
 import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
-import { SchemaValidator } from './schema-validator'
+import { SchemaValidator } from './utils/schema-validator'
 
 const environment = process.env.ENVIRONMENT || 'development' as Environment
 const database = new DatabaseService(Environment.development)

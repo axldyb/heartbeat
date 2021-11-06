@@ -8,7 +8,7 @@ import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
 import { DatabaseManager } from './database-service'
 import { getHeartbeatSchema } from './schemas/get-heartbeat-schema'
-import { SchemaValidator } from './schema-validator'
+import { SchemaValidator } from './utils/schema-validator'
 import { createHeartbeatSchema } from './schemas/create-heartbeat-schema'
 
 export class ServiceHandler {
