@@ -2,11 +2,13 @@ import * as protoLoader from '@grpc/proto-loader'
 import * as grpc from 'grpc'
 import { ProtoGrpcType } from '../proto/heartbeat'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
+import { Logger } from './utils/logger'
 
 export class HeartbeatServer {
 
     private server: grpc.Server
     private host: string
+    private logger = new Logger('HeartbeatServer')
 
     constructor(host: string, port: string, handlers: HeartbeatServiceHandlers) {
         this.host = `${host}:${port}`
@@ -25,11 +27,11 @@ export class HeartbeatServer {
         const credentials = grpc.ServerCredentials.createInsecure()
         this.server.bindAsync(this.host, credentials, (err: Error | null, port: number) => {
             if (err) {
-                console.error(`Server error: ${err.message}`)
+                this.logger.error(`Server error: ${err.message}`)
             } else {
-                console.log(`Server bound on port: ${port}`)
+                this.logger.info(`Server bound on port: ${port}`)
                 this.server.start()
-                console.log(`gRPC server running at http://${this.host}`)
+                this.logger.info(`gRPC server running at http://${this.host}`)
             }
         })
     }

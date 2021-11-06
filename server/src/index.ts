@@ -1,5 +1,5 @@
 import { HeartbeatServer } from './server'
-import { DatabaseService, Environment } from './database-service'
+import { HeartbeatService, Environment } from './heartbeat-service'
 import { ServiceHandler } from './service-handlers'
 
 import { ServerUnaryCall, sendUnaryData } from '@grpc/grpc-js'
@@ -13,7 +13,7 @@ import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
 
 const environment = process.env.ENVIRONMENT || 'development' as Environment
-const database = new DatabaseService(Environment.development)
+const database = new HeartbeatService(Environment.development)
 const schemaValidator = new SchemaValidator()
 const serviceHandler = new ServiceHandler(database, schemaValidator)
 
