@@ -1,5 +1,4 @@
-import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
-import { ServerUnaryCall, sendUnaryData } from '@grpc/grpc-js'
+import { ServerUnaryCall, sendUnaryData, ServerWritableStream } from '@grpc/grpc-js'
 import { newHeartbeat } from '../proto/heartbeat/newHeartbeat'
 import { result } from '../proto/heartbeat/result'
 import { HeartbeatId } from '../proto/heartbeat/HeartbeatId'
@@ -11,6 +10,7 @@ import { getHeartbeatSchema } from './schemas/get-heartbeat-schema'
 import { SchemaValidator } from './utils/schema-validator'
 import { createHeartbeatSchema } from './schemas/create-heartbeat-schema'
 import { Logger } from './utils/logger'
+import { HeartbeatCount } from '../../client/proto/heartbeat/HeartbeatCount'
 
 export class ServiceHandler {
 
@@ -77,5 +77,13 @@ export class ServiceHandler {
                 callback(new Error(`Unable to read heartbeat with ID ${call.request.id}: ${err}`), null)
             }
         }
+    }
+
+    public async streamHeartbeatCount(call: ServerWritableStream<Empty, HeartbeatCount>) {
+        // TODO: Actually stream from database
+        const count = await this.heartbeartService.countHeartbeats()
+        call.write({
+            count: count
+        })
     }
 }

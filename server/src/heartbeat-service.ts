@@ -81,4 +81,9 @@ export class HeartbeatService {
 
         return true
     }
+
+    public async countHeartbeats(): Promise<number> {
+        const count = await this.databaseClient(TableName.heartbeats).count()
+        return count
+    }
 }

@@ -2,7 +2,7 @@ import { HeartbeatServer } from './server'
 import { HeartbeatService, Environment } from './heartbeat-service'
 import { ServiceHandler } from './service-handlers'
 
-import { ServerUnaryCall, sendUnaryData } from '@grpc/grpc-js'
+import { ServerUnaryCall, sendUnaryData, ServerWritableStream } from '@grpc/grpc-js'
 import { newHeartbeat } from '../proto/heartbeat/newHeartbeat'
 import { result } from '../proto/heartbeat/result'
 import { HeartbeatId } from '../proto/heartbeat/HeartbeatId'
@@ -11,6 +11,7 @@ import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
+import { HeartbeatCount } from '../../client/proto/heartbeat/HeartbeatCount'
 
 const environment = process.env.ENVIRONMENT || 'development' as Environment
 const database = new HeartbeatService(Environment.development)
@@ -26,6 +27,9 @@ const handlers: HeartbeatServiceHandlers = {
     },
     readHeartbeat(call: ServerUnaryCall<HeartbeatId, Heartbeat>, callback: sendUnaryData<Heartbeat>) {
         return serviceHandler.readHeartbeat(call, callback)
+    },
+    streamHeartbeatCount(call: ServerWritableStream<Empty, HeartbeatCount>) {
+        return serviceHandler.streamHeartbeatCount(call)
     }
 }
 
