@@ -44,6 +44,12 @@ internal protocol Heartbeat_HeartbeatServiceClientProtocol: GRPCClient {
     _ request: Heartbeat_newHeartbeat,
     callOptions: CallOptions?
   ) -> UnaryCall<Heartbeat_newHeartbeat, Heartbeat_result>
+
+  func streamHeartbeatCount(
+    _ request: Heartbeat_Empty,
+    callOptions: CallOptions?,
+    handler: @escaping (Heartbeat_HeartbeatCount) -> Void
+  ) -> ServerStreamingCall<Heartbeat_Empty, Heartbeat_HeartbeatCount>
 }
 
 extension Heartbeat_HeartbeatServiceClientProtocol {
@@ -104,6 +110,27 @@ extension Heartbeat_HeartbeatServiceClientProtocol {
       interceptors: self.interceptors?.makecreateHeartbeatInterceptors() ?? []
     )
   }
+
+  /// Server streaming call to streamHeartbeatCount
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to streamHeartbeatCount.
+  ///   - callOptions: Call options.
+  ///   - handler: A closure called when each response is received from the server.
+  /// - Returns: A `ServerStreamingCall` with futures for the metadata and status.
+  internal func streamHeartbeatCount(
+    _ request: Heartbeat_Empty,
+    callOptions: CallOptions? = nil,
+    handler: @escaping (Heartbeat_HeartbeatCount) -> Void
+  ) -> ServerStreamingCall<Heartbeat_Empty, Heartbeat_HeartbeatCount> {
+    return self.makeServerStreamingCall(
+      path: "/heartbeat.HeartbeatService/streamHeartbeatCount",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makestreamHeartbeatCountInterceptors() ?? [],
+      handler: handler
+    )
+  }
 }
 
 internal protocol Heartbeat_HeartbeatServiceClientInterceptorFactoryProtocol {
@@ -116,6 +143,9 @@ internal protocol Heartbeat_HeartbeatServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'createHeartbeat'.
   func makecreateHeartbeatInterceptors() -> [ClientInterceptor<Heartbeat_newHeartbeat, Heartbeat_result>]
+
+  /// - Returns: Interceptors to use when invoking 'streamHeartbeatCount'.
+  func makestreamHeartbeatCountInterceptors() -> [ClientInterceptor<Heartbeat_Empty, Heartbeat_HeartbeatCount>]
 }
 
 internal final class Heartbeat_HeartbeatServiceClient: Heartbeat_HeartbeatServiceClientProtocol {

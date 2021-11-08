@@ -17,6 +17,7 @@ export interface ProtoGrpcType {
     Empty: MessageTypeDefinition
     Heartbeat: MessageTypeDefinition
     HeartbeatClient: MessageTypeDefinition
+    HeartbeatCount: MessageTypeDefinition
     HeartbeatDevice: MessageTypeDefinition
     HeartbeatId: MessageTypeDefinition
     HeartbeatList: MessageTypeDefinition
