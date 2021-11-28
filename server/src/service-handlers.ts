@@ -103,20 +103,9 @@ export class ServiceHandler {
     private connectSocket() {
         const realtimeURL = process.env.REALTIME_URL || 'http://realtime:4000/socket'
         this.socket = new Socket(realtimeURL)
-            .onOpen((message) => {
-                this.logger.info('Socket is open')
-            })
-            .onClose((message) => {
-                this.logger.info('Socket is closed')
-            }).onError((message) => {
-                this.logger.error('Socket error: ' + JSON.stringify(message, null, 2))
-            })
-
-        // If we want to monitor all messages
-        // .onMessage((message) => {
-        //     this.logger.info('onMessage: ' + JSON.stringify(message, null, 2))
-        // })
-
+        this.socket.onOpen(() => this.logger.info('Socket is open'))
+        this.socket.onClose(() => this.logger.info('Socket is closed'))
+        this.socket.onError((message) => this.logger.error('Socket error: ' + JSON.stringify(message, null, 2)))
         this.socket.connect()
     }
 
