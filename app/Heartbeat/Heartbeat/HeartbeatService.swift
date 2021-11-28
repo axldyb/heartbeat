@@ -84,4 +84,9 @@ extension HeartbeatService {
             return nil
         }
     }
+
+    func streamHeartbeatCount(handler: @escaping (Heartbeat_HeartbeatCount) -> Void) {
+        let data = Heartbeat_Empty()
+        let _ = serviceClient.streamHeartbeatCount(data, handler: handler)
+    }
 }

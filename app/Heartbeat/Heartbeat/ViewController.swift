@@ -16,8 +16,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-    }
 
+        heartbeatService.streamHeartbeatCount { [weak self] heartbeatCount in
+            NSLog("Heartbeats: \(heartbeatCount.count)")
+            DispatchQueue.main.async {
+                self?.heartbeatsLabel.text = "Heartbeats: \(heartbeatCount.count)"
+            }
+        }
+    }
 
     @IBAction func sendHeartbeat(_ sender: Any) {
         heartbeatService.createHeartbeat()
