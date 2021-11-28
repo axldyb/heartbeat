@@ -37,10 +37,10 @@ export enum TableName {
     heartbeats = 'heartbeats'
 }
 
-export class HeartbeatService {
+export class HeartbeatDatabaseService {
 
     private databaseClient: knex
-    private logger = new Logger('HeartbeatService')
+    private logger = new Logger('HeartbeatDatabaseService')
 
     constructor(environment: Environment) {
         const config = knexConfig[environment]

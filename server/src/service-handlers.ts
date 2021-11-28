@@ -5,7 +5,7 @@ import { HeartbeatId } from '../proto/heartbeat/HeartbeatId'
 import { Heartbeat } from '../proto/heartbeat/Heartbeat'
 import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
-import { HeartbeatService } from './heartbeat-service'
+import { HeartbeatDatabaseService } from './heartbeat-service'
 import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 import { getHeartbeatSchema } from './schemas/get-heartbeat-schema'
 import { SchemaValidator } from './utils/schema-validator'
@@ -14,13 +14,13 @@ import { Logger } from './utils/logger'
 import { Socket } from '@supabase/realtime-js'
 export class ServiceHandler {
 
-    private heartbeartService: HeartbeatService
+    private databaseService: HeartbeatDatabaseService
     private schemaValidator: SchemaValidator
     private socket: Socket
     private logger = new Logger('ServiceHandler')
 
-    constructor(heartbeartService: HeartbeatService, schemaValidator: SchemaValidator) {
-        this.heartbeartService = heartbeartService
+    constructor(databaseService: HeartbeatDatabaseService, schemaValidator: SchemaValidator) {
+        this.databaseService = databaseService
         this.schemaValidator = schemaValidator
         this.connectSocket()
     }
@@ -35,7 +35,7 @@ export class ServiceHandler {
             callback(new Error(`${this.schemaValidator.prettifyJsonSchemaError(schemaValidationErrors)}`), null)
         } else {
             try {
-                const success = await this.heartbeartService.createHeartbeat(call.request)
+                const success = await this.databaseService.createHeartbeat(call.request)
                 if (success) {
                     callback(null, { status: 'OK' })
                 } else {
@@ -52,7 +52,7 @@ export class ServiceHandler {
             this.logger.info(`list heartbeats: ${JSON.stringify(call.request, null, 2)}`)
         }
         try {
-            const heartbeats = await this.heartbeartService.getHeartbeats()
+            const heartbeats = await this.databaseService.getHeartbeats()
             callback(null, { heartbeats: heartbeats })
         } catch (err) {
             callback(new Error('Unable to list heartbeats: ' + err), null)
@@ -69,7 +69,7 @@ export class ServiceHandler {
             callback(new Error(`${this.schemaValidator.prettifyJsonSchemaError(schemaValidationErrors)}`), null)
         } else {
             try {
-                const heartbeat = await this.heartbeartService.getHeartbeat(call.request)
+                const heartbeat = await this.databaseService.getHeartbeat(call.request)
                 if (heartbeat) {
                     callback(null, heartbeat)
                 } else {
@@ -87,7 +87,7 @@ export class ServiceHandler {
         }
 
         // Send the initial count. The listeners below will only trigger on changes.
-        const count = await this.heartbeartService.countHeartbeats()
+        const count = await this.databaseService.countHeartbeats()
         call.write({
             count: count
         })
@@ -101,7 +101,7 @@ export class ServiceHandler {
                 .receive('timeout', (error) => console.log('Timeout when setting up Heartbeat TableListener: ' + error))
 
             heartbeatTableListener.on('INSERT', async (change) => {
-                const count = await this.heartbeartService.countHeartbeats()
+                const count = await this.databaseService.countHeartbeats()
                 this.logger.info(`next count: ${count}`)
                 call.write({
                     count: count
