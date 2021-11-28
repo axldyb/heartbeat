@@ -12,17 +12,21 @@ import { SchemaValidator } from './utils/schema-validator'
 import { createHeartbeatSchema } from './schemas/create-heartbeat-schema'
 import { Logger } from './utils/logger'
 import { Socket } from '@supabase/realtime-js'
+import { HeartbeatStream } from './heartbeat-stream'
+
 export class ServiceHandler {
 
     private databaseService: HeartbeatDatabaseService
     private schemaValidator: SchemaValidator
     private socket: Socket
     private logger = new Logger('ServiceHandler')
+    private streams: HeartbeatStream[] = []
 
     constructor(databaseService: HeartbeatDatabaseService, schemaValidator: SchemaValidator) {
         this.databaseService = databaseService
         this.schemaValidator = schemaValidator
         this.connectSocket()
+        this.startHeartbeatTableListener()
     }
 
     public async createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
@@ -92,47 +96,64 @@ export class ServiceHandler {
             count: count
         })
 
-        try {
-            // TODO: Add keep strem alive message from client and clean up old listeners
-            const heartbeatTableListener = this.socket.channel('realtime:public:heartbeats')
-            heartbeatTableListener.join()
-                .receive('ok', () => console.log('Heartbeat TableListener connected'))
-                .receive('error', (error) => console.log('Error setting up Heartbeat TableListener: ' + error))
-                .receive('timeout', (error) => console.log('Timeout when setting up Heartbeat TableListener: ' + error))
-
-            heartbeatTableListener.on('INSERT', async (change) => {
-                const count = await this.databaseService.countHeartbeats()
-                this.logger.info(`next count: ${count}`)
-                call.write({
-                    count: count
-                })
-            })
-        } catch (error) {
-            this.logger.error('Error setting up lusteners: ' + error)
-        }
+        const stream = new HeartbeatStream(call)
+        this.streams.push(stream)
     }
 
-    private async connectSocket() {
+    private connectSocket() {
         const realtimeURL = process.env.REALTIME_URL || 'http://realtime:4000/socket'
         this.socket = new Socket(realtimeURL)
-
-        this.socket.onOpen((message) => {
-            this.logger.info('Socket is open')
-        })
-
-        this.socket.onClose((message) => {
-            this.logger.info('Socket is closed')
-        })
-
-        this.socket.onError((message) => {
-            this.logger.error('Socket error: ' + JSON.stringify(message, null, 2))
-        })
+            .onOpen((message) => {
+                this.logger.info('Socket is open')
+            })
+            .onClose((message) => {
+                this.logger.info('Socket is closed')
+            }).onError((message) => {
+                this.logger.error('Socket error: ' + JSON.stringify(message, null, 2))
+            })
 
         // If we want to monitor all messages
-        // this.socket.onMessage((message) => {
+        // .onMessage((message) => {
         //     this.logger.info('onMessage: ' + JSON.stringify(message, null, 2))
         // })
 
         this.socket.connect()
+    }
+
+    private startHeartbeatTableListener() {
+        const heartbeatTableListener = this.socket.channel('realtime:public:heartbeats')
+
+        heartbeatTableListener.join()
+            .receive('ok', () => {
+                console.log('Heartbeat TableListener connected')
+            })
+            .receive('error', (error) => {
+                console.log('Error setting up Heartbeat TableListener: ' + error)
+            })
+            .receive('timeout', (error) => {
+                console.log('Timeout when setting up Heartbeat TableListener: ' + error)
+            })
+
+        heartbeatTableListener.on('INSERT', async (change) => {
+            const count = await this.databaseService.countHeartbeats()
+
+            this.logger.info(`new heartbeat count: ${count}`)
+
+            this.streams.forEach(stream => {
+                const didWrite = stream.call.write({
+                    count: count
+                })
+
+                // If the write failed we interpret that as a disconnected client.
+                // We then mark the stream as not active
+                if (!didWrite) {
+                    this.logger.info(`Canceling stream after failed write to client call`)
+                    stream.active = false
+                }
+            })
+
+            // Remove no longer active streams
+            this.streams = this.streams.filter(stream => stream.active)
+        })
     }
 }
