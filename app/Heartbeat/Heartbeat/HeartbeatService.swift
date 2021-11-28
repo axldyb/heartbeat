@@ -15,6 +15,7 @@ class HeartbeatService {
     private let group: MultiThreadedEventLoopGroup
     private let channel: GRPCChannel
     private let serviceClient: Heartbeat_HeartbeatServiceClient
+    fileprivate let heartbeatQueue = DispatchQueue(label: "axldyb.Heartbeat")
 
     init() {
         group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
@@ -62,31 +63,55 @@ extension HeartbeatService {
             hb.device = device
         }
 
-        let request = serviceClient.createHeartbeat(newHeartbeat)
+        heartbeatQueue.async { [weak self] in
+            let request = self?.serviceClient.createHeartbeat(newHeartbeat)
+            guard let request = request else {
+                return
+            }
 
-        do {
-            let response = try request.response.wait()
-            print("Heartbeat created: \(response.status)")
-        } catch {
-            print("Heartbeat failed: \(error)")
+            do {
+                let response = try request.response.wait()
+                print("Heartbeat created: \(response.status)")
+            } catch {
+                print("Heartbeat failed: \(error)")
+            }
         }
     }
 
-    func listHeartbeats() -> Heartbeat_HeartbeatList? {
-        let data = Heartbeat_Empty()
-        let request = serviceClient.listHeartbeats(data)
+    func listHeartbeats(handler: @escaping (Heartbeat_HeartbeatList?) -> Void) {
+        heartbeatQueue.async { [weak self] in
+            guard let aSelf = self else {
+                handler(nil)
+                return
+            }
 
-        do {
-            let response = try request.response.wait()
-            return response
-        } catch {
-            print("Heartbeat failed: \(error)")
-            return nil
+            let data = Heartbeat_Empty()
+            let request = aSelf.serviceClient.listHeartbeats(data)
+
+            DispatchQueue.main.async {
+                do {
+                    let response = try request.response.wait()
+                    handler(response)
+                } catch {
+                    print("Heartbeat failed: \(error)")
+                    handler(nil)
+                }
+            }
         }
     }
 
     func streamHeartbeatCount(handler: @escaping (Heartbeat_HeartbeatCount) -> Void) {
-        let data = Heartbeat_Empty()
-        let _ = serviceClient.streamHeartbeatCount(data, handler: handler)
+        heartbeatQueue.async { [weak self] in
+            guard let aSelf = self else {
+                return
+            }
+
+            let data = Heartbeat_Empty()
+            let _ = aSelf.serviceClient.streamHeartbeatCount(data) { count in
+                DispatchQueue.main.async {
+                    handler(count)
+                }
+            }
+        }
     }
 }

@@ -19,9 +19,7 @@ class ViewController: UIViewController {
 
         heartbeatService.streamHeartbeatCount { [weak self] heartbeatCount in
             NSLog("Heartbeats: \(heartbeatCount.count)")
-            DispatchQueue.main.async {
-                self?.heartbeatsLabel.text = "Heartbeats: \(heartbeatCount.count)"
-            }
+            self?.heartbeatsLabel.text = "Heartbeats: \(heartbeatCount.count)"
         }
     }
 
