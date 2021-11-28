@@ -1,10 +1,31 @@
 # docker-compose.yml
 version: "3"
 services:
+  realtime:
+    image: supabase/realtime
+    ports:
+      - "4000:4000"
+    environment:
+      DB_HOST: postgres
+      DB_NAME: heartbeat
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_PORT: 5432
+      PORT: 4000
+      SECURE_CHANNELS: 'false'
+    depends_on:
+      - postgres
+
   postgres:
-    image: postgres:11.2-alpine
+    image: supabase/postgres
     ports:
       - "5432:5432"
+    volumes:
+      - ./server/db/init:/docker-entrypoint-initdb.d/
+    command:
+      - postgres
+      - -c
+      - wal_level=logical
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
@@ -15,7 +36,7 @@ services:
       context: ./
       dockerfile: ./server/Dockerfile
     depends_on:
-      - postgres
+      - realtime
     ports:
       - "9090:9090"
       - "9229:9229"
