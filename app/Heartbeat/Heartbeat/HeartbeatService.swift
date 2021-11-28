@@ -107,7 +107,7 @@ extension HeartbeatService {
             }
 
             let data = Heartbeat_Empty()
-            let _ = aSelf.serviceClient.streamHeartbeatCount(data) { count in
+            _ = aSelf.serviceClient.streamHeartbeatCount(data) { count in
                 DispatchQueue.main.async {
                     handler(count)
                 }
