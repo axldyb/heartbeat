@@ -83,7 +83,7 @@ export class HeartbeatService {
     }
 
     public async countHeartbeats(): Promise<number> {
-        const count = await this.databaseClient(TableName.heartbeats).count()
-        return count
+        const result = await this.databaseClient(TableName.heartbeats).count()
+        return result[0] ? result[0].count : 0
     }
 }
