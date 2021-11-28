@@ -1,5 +1,5 @@
 import { HeartbeatServer } from './server'
-import { HeartbeatDatabaseService, Environment } from './heartbeat-service'
+import { HeartbeatDatabaseService, Environment } from './heartbeat-database-service'
 import { ServiceHandler } from './service-handlers'
 import { ServerUnaryCall, sendUnaryData, ServerWritableStream } from '@grpc/grpc-js'
 import { newHeartbeat } from '../proto/heartbeat/newHeartbeat'
