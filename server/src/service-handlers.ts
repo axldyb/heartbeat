@@ -6,21 +6,23 @@ import { Heartbeat } from '../proto/heartbeat/Heartbeat'
 import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
 import { HeartbeatService } from './heartbeat-service'
+import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 import { getHeartbeatSchema } from './schemas/get-heartbeat-schema'
 import { SchemaValidator } from './utils/schema-validator'
 import { createHeartbeatSchema } from './schemas/create-heartbeat-schema'
 import { Logger } from './utils/logger'
-import { HeartbeatCount } from '../../client/proto/heartbeat/HeartbeatCount'
-
+import { Socket } from '@supabase/realtime-js'
 export class ServiceHandler {
 
     private heartbeartService: HeartbeatService
     private schemaValidator: SchemaValidator
+    private socket: Socket
     private logger = new Logger('ServiceHandler')
 
     constructor(heartbeartService: HeartbeatService, schemaValidator: SchemaValidator) {
         this.heartbeartService = heartbeartService
         this.schemaValidator = schemaValidator
+        this.connectSocket()
     }
 
     public async createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
@@ -80,10 +82,57 @@ export class ServiceHandler {
     }
 
     public async streamHeartbeatCount(call: ServerWritableStream<Empty, HeartbeatCount>) {
-        // TODO: Actually stream from database
+        if (call.request) {
+            this.logger.info(`stream heartbeats: ${JSON.stringify(call.request, null, 2)}`)
+        }
+
+        // Send the initial count. The listeners below will only trigger on changes.
         const count = await this.heartbeartService.countHeartbeats()
         call.write({
             count: count
         })
+
+        try {
+            // TODO: Add keep strem alive message from client and clean up old listeners
+            const heartbeatTableListener = this.socket.channel('realtime:public:heartbeats')
+            heartbeatTableListener.join()
+                .receive('ok', () => console.log('Heartbeat TableListener connected'))
+                .receive('error', (error) => console.log('Error setting up Heartbeat TableListener: ' + error))
+                .receive('timeout', (error) => console.log('Timeout when setting up Heartbeat TableListener: ' + error))
+
+            heartbeatTableListener.on('INSERT', async (change) => {
+                const count = await this.heartbeartService.countHeartbeats()
+                this.logger.info(`next count: ${count}`)
+                call.write({
+                    count: count
+                })
+            })
+        } catch (error) {
+            this.logger.error('Error setting up lusteners: ' + error)
+        }
+    }
+
+    private async connectSocket() {
+        const realtimeURL = process.env.REALTIME_URL || 'http://realtime:4000/socket'
+        this.socket = new Socket(realtimeURL)
+
+        this.socket.onOpen((message) => {
+            this.logger.info('Socket is open')
+        })
+
+        this.socket.onClose((message) => {
+            this.logger.info('Socket is closed')
+        })
+
+        this.socket.onError((message) => {
+            this.logger.error('Socket error: ' + JSON.stringify(message, null, 2))
+        })
+
+        // If we want to monitor all messages
+        // this.socket.onMessage((message) => {
+        //     this.logger.info('onMessage: ' + JSON.stringify(message, null, 2))
+        // })
+
+        this.socket.connect()
     }
 }
