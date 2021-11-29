@@ -21,7 +21,10 @@ services:
     ports:
       - "5432:5432"
     volumes:
+      # initial setup of tables etc.
       - ./server/db/init:/docker-entrypoint-initdb.d/
+      # keep data between boots
+      - ./postgres-data:/var/lib/postgresql/data
     command:
       - postgres
       - -c
