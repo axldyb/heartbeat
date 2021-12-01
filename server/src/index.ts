@@ -12,8 +12,8 @@ import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
 
-const environment = process.env.ENVIRONMENT || 'development' as Environment
-const database = new HeartbeatDatabaseService(Environment.development)
+const environment = process.env.NODE_ENV || 'development'
+const database = new HeartbeatDatabaseService(environment as Environment)
 const schemaValidator = new SchemaValidator()
 const serviceHandler = new ServiceHandler(database, schemaValidator)
 
