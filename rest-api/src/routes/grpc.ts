@@ -22,7 +22,7 @@ const listHeartbeats = (req: Request, res: Response) => {
     })
 }
 const readHeartbeat = (req: Request, res: Response) => {
-    const payload = { id: parseInt(req.params.id) }
+    const payload = { id: req.params.id }
 
     client.readHeartbeat(payload, (err, result) => {
         if (err) {
