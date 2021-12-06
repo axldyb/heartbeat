@@ -21,7 +21,7 @@ message HeartbeatList {
 }
 
 message HeartbeatId {
-  int32 id = 1;
+  string id = 1;
 }
 
 message HeartbeatCount {
@@ -29,7 +29,7 @@ message HeartbeatCount {
 }
 
 message Heartbeat {
-  int32 id = 1;
+  string id = 1;
   google.protobuf.Timestamp timestamp = 2;
   HeartbeatClient client = 3;
   HeartbeatDevice device = 4;

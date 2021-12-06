@@ -2,9 +2,9 @@
 
 
 export interface HeartbeatId {
-  'id'?: (number);
+  'id'?: (string);
 }
 
 export interface HeartbeatId__Output {
-  'id': (number);
+  'id': (string);
 }
