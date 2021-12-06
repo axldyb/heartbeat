@@ -52,10 +52,10 @@ services:
       - POSTGRES_USER
       - POSTGRES_DB
 
-  client:
+  rest-api:
     build:
       context: ./
-      dockerfile: ./client/Dockerfile
+      dockerfile: ./rest-api/Dockerfile
     depends_on:
       - server
     ports:

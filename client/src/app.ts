@@ -16,5 +16,5 @@ app.use('/api', heartbeatsRouter)
 
 // run server
 app.listen(3000, () => {
-    console.log('API client listing on port 3000')
+    console.log('REST API listing on port 3000')
 })
