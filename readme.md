@@ -7,8 +7,7 @@ Then you can run the regular 'up' command to start all containers.
 Run `$ docker-compose up -d`
 
 ## TODO
-* Replace knex, use the init sql to create the heartbeat table
-* Make volume for postgres database to save data between boots
+
 
 
 ## iOS app
