@@ -1,0 +1,7 @@
+# docker-compose.development.yml
+version: "3"
+services:
+  server:
+    volumes:
+      - ./server/src:/server/src
+      - ./server/nodemon.json:/server/nodemon.json
