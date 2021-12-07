@@ -5,49 +5,7 @@ import { HeartbeatId } from '../proto/heartbeat/HeartbeatId'
 import { newHeartbeat } from '../proto/heartbeat/newHeartbeat'
 import { HeartbeatSerializer } from './heartbeat-serializer'
 import { Logger } from './utils/logger'
-
-const knexConfig = {
-    development: {
-        client: 'postgresql',
-        connection: {
-            host: 'postgres',
-            user: 'postgres',
-            password: 'postgres',
-            port: '5432',
-            database: 'heartbeat',
-        },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            directory: path.join(__dirname, 'db', 'migrations'),
-        },
-        seeds: {
-            directory: path.join(__dirname, 'db', 'seeds'),
-        },
-    },
-    production: {
-        client: 'postgresql',
-        connection: {
-            host: 'postgres',
-            user: 'postgres',
-            password: 'postgres',
-            port: '5432',
-            database: 'heartbeat',
-        },
-        pool: {
-            min: 2,
-            max: 10,
-        },
-        migrations: {
-            directory: path.join(__dirname, 'db', 'migrations'),
-        },
-        seeds: {
-            directory: path.join(__dirname, 'db', 'seeds'),
-        },
-    }
-}
+import * as knexConfig from '../knexfile'
 
 export enum Environment {
     development = 'development',
