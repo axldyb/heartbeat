@@ -11,10 +11,12 @@
     "sourceMap": true,
     "target": "es6",
     "resolveJsonModule": true, // allow json files to be imported
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "allowJs": true,
   },
   "compileOnSave": true,
   "include": [
     "src",
+    "./knexfile.js"
   ]
 }
