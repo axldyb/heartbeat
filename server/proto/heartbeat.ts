@@ -21,6 +21,7 @@ export interface ProtoGrpcType {
     HeartbeatDevice: MessageTypeDefinition
     HeartbeatId: MessageTypeDefinition
     HeartbeatList: MessageTypeDefinition
+    HeartbeatLocation: MessageTypeDefinition
     HeartbeatService: SubtypeConstructor<typeof grpc.Client, _heartbeat_HeartbeatServiceClient> & { service: _heartbeat_HeartbeatServiceDefinition }
     newHeartbeat: MessageTypeDefinition
     result: MessageTypeDefinition

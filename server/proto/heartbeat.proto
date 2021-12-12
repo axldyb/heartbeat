@@ -33,6 +33,7 @@ message Heartbeat {
   google.protobuf.Timestamp timestamp = 2;
   HeartbeatClient client = 3;
   HeartbeatDevice device = 4;
+  HeartbeatLocation location = 5;
 }
 
 message HeartbeatClient {
@@ -48,6 +49,18 @@ message HeartbeatDevice {
   string osVersion = 4;
   string model = 5;
   string language = 6;
+}
+
+message HeartbeatLocation {
+  optional string ip = 1;
+  optional string city = 2;
+  optional string region = 3;
+  optional string country = 4;
+  optional double latitude = 5;
+  optional double longitude = 6;
+  optional string org = 7;
+  optional string postal = 8;
+  optional string timezone = 9;
 }
 
 message newHeartbeat {
