@@ -9,8 +9,6 @@ There's also a `down.sh` to shut down all containers.
 ## Environment
 To set up the desired environment copy the `.env.example`, modify and name it `.env`.
 
-## TODO
-
 ## iOS app
 
 Installed the GRPC-Swift package using Xcode 11 package manager.
