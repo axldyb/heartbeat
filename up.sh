@@ -13,5 +13,8 @@ if [ "$NODE_ENV" = "development" ] ; then
   docker-compose -f docker-compose.yml -f docker-compose.development.yml up -d
 else
   echo "Starting docker compose in production mode"
+  docker-compose -f docker-compose.yml build
+  docker-compose -f docker-compose.yml up -d postgres
+  sleep 10
   docker-compose -f docker-compose.yml up -d
 fi
