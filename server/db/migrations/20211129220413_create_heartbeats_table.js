@@ -13,9 +13,8 @@ exports.up = function (knex, Promise) {
         table.string('device_model', 255).notNullable()
         table.string('device_language', 255).notNullable()
     })
-
 }
 
 exports.down = function (knex, Promise) {
-
+    return knex.schema.dropTable('heartbeats')
 }
