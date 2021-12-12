@@ -3,12 +3,13 @@
 ## Up and running
 For the first run you may run `$ docker-compose up -d postgres` first to initialize the Postgres database.
 
-Then you can run the regular 'up' command to start all containers.
-Run `$ docker-compose up -d`
+Then you can use the `up.sh` script to start all containers.
+There's also a `down.sh` to shut down all containers.
+
+## Environment
+To set up the desired environment copy the `.env.example`, modify and name it `.env`.
 
 ## TODO
-
-
 
 ## iOS app
 
