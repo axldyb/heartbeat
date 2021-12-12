@@ -1,4 +1,3 @@
-import * as path from 'path'
 import * as knex from 'knex'
 import { Heartbeat } from '../proto/heartbeat/Heartbeat'
 import { HeartbeatId } from '../proto/heartbeat/HeartbeatId'
@@ -6,6 +5,7 @@ import { newHeartbeat } from '../proto/heartbeat/newHeartbeat'
 import { HeartbeatSerializer } from './heartbeat-serializer'
 import { Logger } from './utils/logger'
 import * as knexConfig from '../knexfile'
+import { IpInfoService } from './ip-info-service'
 
 export enum Environment {
     development = 'development',
@@ -19,11 +19,13 @@ export enum TableName {
 export class HeartbeatDatabaseService {
 
     private databaseClient: knex
+    private ipInfoService: IpInfoService
     private logger = new Logger('HeartbeatDatabaseService')
 
-    constructor(environment: Environment) {
+    constructor(environment: Environment, ipInfoService: IpInfoService) {
         const config = knexConfig[environment]
         this.databaseClient = knex(config)
+        this.ipInfoService = ipInfoService
     }
 
     public async getHeartbeats(): Promise<Heartbeat[]> {
@@ -48,13 +50,14 @@ export class HeartbeatDatabaseService {
         }
     }
 
-    public async createHeartbeat(newHeartbeat: newHeartbeat): Promise<boolean> {
+    public async createHeartbeat(newHeartbeat: newHeartbeat, ip: string): Promise<boolean> {
         if (!newHeartbeat) {
             this.logger.error(`Invalid heartbeat provided: ${JSON.stringify(newHeartbeat, null, 2)}`)
             return false
         }
 
-        const data = HeartbeatSerializer.serializeHeartbeatToDatabaseObject(newHeartbeat)
+        const ipInfo = await this.ipInfoService.getIpInfo(ip)
+        const data = HeartbeatSerializer.serializeNewHeartbeatToDatabaseObject(this.databaseClient, newHeartbeat, ipInfo)
 
         await this.databaseClient(TableName.heartbeats).insert(data)
 

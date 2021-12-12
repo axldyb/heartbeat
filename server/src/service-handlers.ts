@@ -13,18 +13,21 @@ import { createHeartbeatSchema } from './schemas/create-heartbeat-schema'
 import { Logger } from './utils/logger'
 import { Socket } from '@supabase/realtime-js'
 import { HeartbeatStream } from './heartbeat-stream'
+import { IpInfoService } from './ip-info-service'
 
 export class ServiceHandler {
 
     private databaseService: HeartbeatDatabaseService
     private schemaValidator: SchemaValidator
+    private ipInfoService: IpInfoService
     private socket: Socket
     private logger = new Logger('ServiceHandler')
     private streams: HeartbeatStream[] = []
 
-    constructor(databaseService: HeartbeatDatabaseService, schemaValidator: SchemaValidator) {
+    constructor(databaseService: HeartbeatDatabaseService, schemaValidator: SchemaValidator, ipInfoService: IpInfoService) {
         this.databaseService = databaseService
         this.schemaValidator = schemaValidator
+        this.ipInfoService = ipInfoService
         this.connectSocket()
         this.startHeartbeatTableListener()
     }
@@ -39,7 +42,8 @@ export class ServiceHandler {
             callback(new Error(`${this.schemaValidator.prettifyJsonSchemaError(schemaValidationErrors)}`), null)
         } else {
             try {
-                const success = await this.databaseService.createHeartbeat(call.request)
+                const ip = this.ipInfoService.extractIp(call.getPeer())
+                const success = await this.databaseService.createHeartbeat(call.request, ip)
                 if (success) {
                     callback(null, { status: 'OK' })
                 } else {

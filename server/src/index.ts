@@ -11,11 +11,13 @@ import { HeartbeatList } from '../proto/heartbeat/HeartbeatList'
 import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
+import { IpInfoService } from './ip-info-service'
 
 const environment = process.env.NODE_ENV || 'development'
-const database = new HeartbeatDatabaseService(environment as Environment)
+const inInfoService = new IpInfoService()
+const database = new HeartbeatDatabaseService(environment as Environment, inInfoService)
 const schemaValidator = new SchemaValidator()
-const serviceHandler = new ServiceHandler(database, schemaValidator)
+const serviceHandler = new ServiceHandler(database, schemaValidator, inInfoService)
 
 const handlers: HeartbeatServiceHandlers = {
     createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
