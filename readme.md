@@ -8,7 +8,7 @@ For the server and API applications I used the `proto-loader` node package.
 
 The plugin for Swift is included [here](https://github.com/grpc/grpc-swift#getting-the-protoc-plugins), guide [here](https://github.com/grpc/grpc-swift/blob/main/docs/plugin.md). I fetched it useing `homebrew` and added the plugin to the repo under `/proto/swift`.
 ## Up and running
-For the first run you may run `$ docker-compose up -d postgres` first to initialize the Postgres database.
+For the first run you may run `$ docker-compose up -d postgres` first to initialize the Postgres database. This takes some time so we run this command manually to let it have some time to get things done.
 
 Then you can use the `up.sh` script to start all containers.
 There's also a `down.sh` to shut down all containers.
