@@ -6,12 +6,15 @@ To generate Protocol Buffer support code I used `protoc` plugins. The script `/p
 
 For the server and API applications I used the `proto-loader` node package.
 
-The plugin for Swift is included [here](https://github.com/grpc/grpc-swift#getting-the-protoc-plugins). I fetched it useing `homebrew` and added the plugin to the repo under `/proto/swift`.
+The plugin for Swift is included [here](https://github.com/grpc/grpc-swift#getting-the-protoc-plugins), guide [here](https://github.com/grpc/grpc-swift/blob/main/docs/plugin.md). I fetched it useing `homebrew` and added the plugin to the repo under `/proto/swift`.
 ## Up and running
 For the first run you may run `$ docker-compose up -d postgres` first to initialize the Postgres database.
 
 Then you can use the `up.sh` script to start all containers.
 There's also a `down.sh` to shut down all containers.
+
+## gRPC streaming
+I wanted to explore and test the streaming features of gRPC. To do so I had to have some data to pass from the server to the client. My idea is that whenever a new heartbeat is created all connected clients may listen to the stream and get updates. I used the [Supabase Realtime](https://github.com/supabase/realtime) library to do this together with PostgreSQL. With the Supabase Realtime it's possible to set up listeners on the database and get notified about changes. For the Heartbeat server I set up a listener on `INSERT` operations to the `heartbeat` table in the database. Then I'm able to push updates to every client listening on the heartbeat count stream.
 
 ## Environment
 To set up the desired environment copy the `.env.example`, modify and name it `.env`.
