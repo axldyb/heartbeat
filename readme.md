@@ -1,5 +1,12 @@
 # Heartbeat
+Heartbeat is a demo project I created to experiment with gRPC. The idea is a simple server accepting heartbeats, alive messages, from clients.
 
+# protoc
+To generate Protocol Buffer support code I used `protoc` plugins. The script `/proto/generate-types.sh` is used every time we make changes to the `heartbeat.proto` file. This will update the generated types and services for the different applications.
+
+For the server and API applications I used the `proto-loader` node package.
+
+The plugin for Swift is included [here](https://github.com/grpc/grpc-swift#getting-the-protoc-plugins). I fetched it useing `homebrew` and added the plugin to the repo under `/proto/swift`.
 ## Up and running
 For the first run you may run `$ docker-compose up -d postgres` first to initialize the Postgres database.
 
