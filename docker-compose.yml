@@ -3,14 +3,12 @@ version: "3"
 services:
   realtime:
     image: supabase/realtime
-    ports:
-      - "4000:4000"
     environment:
       DB_HOST: postgres
       DB_NAME: ${POSTGRES_DB}
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_PORT: 5432
+      DB_PORT: ${POSTGRES_PORT}
       PORT: 4000
       SECURE_CHANNELS: 'false'
     depends_on:
@@ -18,8 +16,6 @@ services:
 
   postgres:
     image: supabase/postgres
-    ports:
-      - "5432:5432"
     volumes:
       # initial setup of tables etc.
       - ./server/db/init:/docker-entrypoint-initdb.d/
@@ -33,6 +29,7 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_USER
       - POSTGRES_DB
+      - POSTGRES_PORT
 
   server:
     build:
@@ -40,6 +37,9 @@ services:
       dockerfile: ./server/Dockerfile
     depends_on:
       - realtime
+    links:
+      - "postgres"
+      - "realtime"
     ports:
       - "9090:9090"
       - "9229:9229"
@@ -48,6 +48,7 @@ services:
       - POSTGRES_PASSWORD
       - POSTGRES_USER
       - POSTGRES_DB
+      - POSTGRES_PORT
 
   rest-api:
     build:
