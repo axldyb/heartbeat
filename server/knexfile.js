@@ -4,10 +4,10 @@ const commonConfig = {
     client: 'postgresql',
     connection: {
         host: 'postgres',
-        user: 'postgres',
-        password: 'postgres',
-        port: '5432',
-        database: 'heartbeat',
+        user: process.env.POSTGRES_USER || '',
+        password: process.env.POSTGRES_PASSWORD || '',
+        port: process.env.POSTGRES_PORT || '',
+        database: process.env.POSTGRES_DB || '',
     },
     pool: {
         min: 2,
