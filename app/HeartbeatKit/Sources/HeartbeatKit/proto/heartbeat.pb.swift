@@ -20,232 +20,232 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-struct Heartbeat_Empty {
+public struct Heartbeat_Empty {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Heartbeat_HeartbeatList {
+public struct Heartbeat_HeartbeatList {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var heartbeats: [Heartbeat_Heartbeat] = []
+  public var heartbeats: [Heartbeat_Heartbeat] = []
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Heartbeat_HeartbeatId {
+public struct Heartbeat_HeartbeatId {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+  public var id: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Heartbeat_HeartbeatCount {
+public struct Heartbeat_HeartbeatCount {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var count: Int32 = 0
+  public var count: Int32 = 0
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Heartbeat_Heartbeat {
+public struct Heartbeat_Heartbeat {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String {
+  public var id: String {
     get {return _storage._id}
     set {_uniqueStorage()._id = newValue}
   }
 
-  var timestamp: SwiftProtobuf.Google_Protobuf_Timestamp {
+  public var timestamp: SwiftProtobuf.Google_Protobuf_Timestamp {
     get {return _storage._timestamp ?? SwiftProtobuf.Google_Protobuf_Timestamp()}
     set {_uniqueStorage()._timestamp = newValue}
   }
   /// Returns true if `timestamp` has been explicitly set.
-  var hasTimestamp: Bool {return _storage._timestamp != nil}
+  public var hasTimestamp: Bool {return _storage._timestamp != nil}
   /// Clears the value of `timestamp`. Subsequent reads from it will return its default value.
-  mutating func clearTimestamp() {_uniqueStorage()._timestamp = nil}
+  public mutating func clearTimestamp() {_uniqueStorage()._timestamp = nil}
 
-  var client: Heartbeat_HeartbeatClient {
+  public var client: Heartbeat_HeartbeatClient {
     get {return _storage._client ?? Heartbeat_HeartbeatClient()}
     set {_uniqueStorage()._client = newValue}
   }
   /// Returns true if `client` has been explicitly set.
-  var hasClient: Bool {return _storage._client != nil}
+  public var hasClient: Bool {return _storage._client != nil}
   /// Clears the value of `client`. Subsequent reads from it will return its default value.
-  mutating func clearClient() {_uniqueStorage()._client = nil}
+  public mutating func clearClient() {_uniqueStorage()._client = nil}
 
-  var device: Heartbeat_HeartbeatDevice {
+  public var device: Heartbeat_HeartbeatDevice {
     get {return _storage._device ?? Heartbeat_HeartbeatDevice()}
     set {_uniqueStorage()._device = newValue}
   }
   /// Returns true if `device` has been explicitly set.
-  var hasDevice: Bool {return _storage._device != nil}
+  public var hasDevice: Bool {return _storage._device != nil}
   /// Clears the value of `device`. Subsequent reads from it will return its default value.
-  mutating func clearDevice() {_uniqueStorage()._device = nil}
+  public mutating func clearDevice() {_uniqueStorage()._device = nil}
 
-  var location: Heartbeat_HeartbeatLocation {
+  public var location: Heartbeat_HeartbeatLocation {
     get {return _storage._location ?? Heartbeat_HeartbeatLocation()}
     set {_uniqueStorage()._location = newValue}
   }
   /// Returns true if `location` has been explicitly set.
-  var hasLocation: Bool {return _storage._location != nil}
+  public var hasLocation: Bool {return _storage._location != nil}
   /// Clears the value of `location`. Subsequent reads from it will return its default value.
-  mutating func clearLocation() {_uniqueStorage()._location = nil}
+  public mutating func clearLocation() {_uniqueStorage()._location = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _storage = _StorageClass.defaultInstance
 }
 
-struct Heartbeat_HeartbeatClient {
+public struct Heartbeat_HeartbeatClient {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+  public var id: String = String()
 
-  var name: String = String()
+  public var name: String = String()
 
-  var version: String = String()
+  public var version: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Heartbeat_HeartbeatDevice {
+public struct Heartbeat_HeartbeatDevice {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var id: String = String()
+  public var id: String = String()
 
-  var name: String = String()
+  public var name: String = String()
 
-  var os: String = String()
+  public var os: String = String()
 
-  var osVersion: String = String()
+  public var osVersion: String = String()
 
-  var model: String = String()
+  public var model: String = String()
 
-  var language: String = String()
+  public var language: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
-struct Heartbeat_HeartbeatLocation {
+public struct Heartbeat_HeartbeatLocation {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var ip: String {
+  public var ip: String {
     get {return _ip ?? String()}
     set {_ip = newValue}
   }
   /// Returns true if `ip` has been explicitly set.
-  var hasIp: Bool {return self._ip != nil}
+  public var hasIp: Bool {return self._ip != nil}
   /// Clears the value of `ip`. Subsequent reads from it will return its default value.
-  mutating func clearIp() {self._ip = nil}
+  public mutating func clearIp() {self._ip = nil}
 
-  var city: String {
+  public var city: String {
     get {return _city ?? String()}
     set {_city = newValue}
   }
   /// Returns true if `city` has been explicitly set.
-  var hasCity: Bool {return self._city != nil}
+  public var hasCity: Bool {return self._city != nil}
   /// Clears the value of `city`. Subsequent reads from it will return its default value.
-  mutating func clearCity() {self._city = nil}
+  public mutating func clearCity() {self._city = nil}
 
-  var region: String {
+  public var region: String {
     get {return _region ?? String()}
     set {_region = newValue}
   }
   /// Returns true if `region` has been explicitly set.
-  var hasRegion: Bool {return self._region != nil}
+  public var hasRegion: Bool {return self._region != nil}
   /// Clears the value of `region`. Subsequent reads from it will return its default value.
-  mutating func clearRegion() {self._region = nil}
+  public mutating func clearRegion() {self._region = nil}
 
-  var country: String {
+  public var country: String {
     get {return _country ?? String()}
     set {_country = newValue}
   }
   /// Returns true if `country` has been explicitly set.
-  var hasCountry: Bool {return self._country != nil}
+  public var hasCountry: Bool {return self._country != nil}
   /// Clears the value of `country`. Subsequent reads from it will return its default value.
-  mutating func clearCountry() {self._country = nil}
+  public mutating func clearCountry() {self._country = nil}
 
-  var latitude: Double {
+  public var latitude: Double {
     get {return _latitude ?? 0}
     set {_latitude = newValue}
   }
   /// Returns true if `latitude` has been explicitly set.
-  var hasLatitude: Bool {return self._latitude != nil}
+  public var hasLatitude: Bool {return self._latitude != nil}
   /// Clears the value of `latitude`. Subsequent reads from it will return its default value.
-  mutating func clearLatitude() {self._latitude = nil}
+  public mutating func clearLatitude() {self._latitude = nil}
 
-  var longitude: Double {
+  public var longitude: Double {
     get {return _longitude ?? 0}
     set {_longitude = newValue}
   }
   /// Returns true if `longitude` has been explicitly set.
-  var hasLongitude: Bool {return self._longitude != nil}
+  public var hasLongitude: Bool {return self._longitude != nil}
   /// Clears the value of `longitude`. Subsequent reads from it will return its default value.
-  mutating func clearLongitude() {self._longitude = nil}
+  public mutating func clearLongitude() {self._longitude = nil}
 
-  var org: String {
+  public var org: String {
     get {return _org ?? String()}
     set {_org = newValue}
   }
   /// Returns true if `org` has been explicitly set.
-  var hasOrg: Bool {return self._org != nil}
+  public var hasOrg: Bool {return self._org != nil}
   /// Clears the value of `org`. Subsequent reads from it will return its default value.
-  mutating func clearOrg() {self._org = nil}
+  public mutating func clearOrg() {self._org = nil}
 
-  var postal: String {
+  public var postal: String {
     get {return _postal ?? String()}
     set {_postal = newValue}
   }
   /// Returns true if `postal` has been explicitly set.
-  var hasPostal: Bool {return self._postal != nil}
+  public var hasPostal: Bool {return self._postal != nil}
   /// Clears the value of `postal`. Subsequent reads from it will return its default value.
-  mutating func clearPostal() {self._postal = nil}
+  public mutating func clearPostal() {self._postal = nil}
 
-  var timezone: String {
+  public var timezone: String {
     get {return _timezone ?? String()}
     set {_timezone = newValue}
   }
   /// Returns true if `timezone` has been explicitly set.
-  var hasTimezone: Bool {return self._timezone != nil}
+  public var hasTimezone: Bool {return self._timezone != nil}
   /// Clears the value of `timezone`. Subsequent reads from it will return its default value.
-  mutating func clearTimezone() {self._timezone = nil}
+  public mutating func clearTimezone() {self._timezone = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _ip: String? = nil
   fileprivate var _city: String? = nil
@@ -258,47 +258,47 @@ struct Heartbeat_HeartbeatLocation {
   fileprivate var _timezone: String? = nil
 }
 
-struct Heartbeat_newHeartbeat {
+public struct Heartbeat_newHeartbeat {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var client: Heartbeat_HeartbeatClient {
+  public var client: Heartbeat_HeartbeatClient {
     get {return _client ?? Heartbeat_HeartbeatClient()}
     set {_client = newValue}
   }
   /// Returns true if `client` has been explicitly set.
-  var hasClient: Bool {return self._client != nil}
+  public var hasClient: Bool {return self._client != nil}
   /// Clears the value of `client`. Subsequent reads from it will return its default value.
-  mutating func clearClient() {self._client = nil}
+  public mutating func clearClient() {self._client = nil}
 
-  var device: Heartbeat_HeartbeatDevice {
+  public var device: Heartbeat_HeartbeatDevice {
     get {return _device ?? Heartbeat_HeartbeatDevice()}
     set {_device = newValue}
   }
   /// Returns true if `device` has been explicitly set.
-  var hasDevice: Bool {return self._device != nil}
+  public var hasDevice: Bool {return self._device != nil}
   /// Clears the value of `device`. Subsequent reads from it will return its default value.
-  mutating func clearDevice() {self._device = nil}
+  public mutating func clearDevice() {self._device = nil}
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 
   fileprivate var _client: Heartbeat_HeartbeatClient? = nil
   fileprivate var _device: Heartbeat_HeartbeatDevice? = nil
 }
 
-struct Heartbeat_result {
+public struct Heartbeat_result {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  var status: String = String()
+  public var status: String = String()
 
-  var unknownFields = SwiftProtobuf.UnknownStorage()
+  public var unknownFields = SwiftProtobuf.UnknownStorage()
 
-  init() {}
+  public init() {}
 }
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
@@ -306,31 +306,31 @@ struct Heartbeat_result {
 fileprivate let _protobuf_package = "heartbeat"
 
 extension Heartbeat_Empty: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Empty"
-  static let _protobuf_nameMap = SwiftProtobuf._NameMap()
+  public static let protoMessageName: String = _protobuf_package + ".Empty"
+  public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let _ = try decoder.nextFieldNumber() {
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_Empty, rhs: Heartbeat_Empty) -> Bool {
+  public static func ==(lhs: Heartbeat_Empty, rhs: Heartbeat_Empty) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
 extension Heartbeat_HeartbeatList: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".HeartbeatList"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".HeartbeatList"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "heartbeats"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -342,14 +342,14 @@ extension Heartbeat_HeartbeatList: SwiftProtobuf.Message, SwiftProtobuf._Message
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.heartbeats.isEmpty {
       try visitor.visitRepeatedMessageField(value: self.heartbeats, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_HeartbeatList, rhs: Heartbeat_HeartbeatList) -> Bool {
+  public static func ==(lhs: Heartbeat_HeartbeatList, rhs: Heartbeat_HeartbeatList) -> Bool {
     if lhs.heartbeats != rhs.heartbeats {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -357,12 +357,12 @@ extension Heartbeat_HeartbeatList: SwiftProtobuf.Message, SwiftProtobuf._Message
 }
 
 extension Heartbeat_HeartbeatId: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".HeartbeatId"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".HeartbeatId"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -374,14 +374,14 @@ extension Heartbeat_HeartbeatId: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_HeartbeatId, rhs: Heartbeat_HeartbeatId) -> Bool {
+  public static func ==(lhs: Heartbeat_HeartbeatId, rhs: Heartbeat_HeartbeatId) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -389,12 +389,12 @@ extension Heartbeat_HeartbeatId: SwiftProtobuf.Message, SwiftProtobuf._MessageIm
 }
 
 extension Heartbeat_HeartbeatCount: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".HeartbeatCount"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".HeartbeatCount"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "count"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -406,14 +406,14 @@ extension Heartbeat_HeartbeatCount: SwiftProtobuf.Message, SwiftProtobuf._Messag
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if self.count != 0 {
       try visitor.visitSingularInt32Field(value: self.count, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_HeartbeatCount, rhs: Heartbeat_HeartbeatCount) -> Bool {
+  public static func ==(lhs: Heartbeat_HeartbeatCount, rhs: Heartbeat_HeartbeatCount) -> Bool {
     if lhs.count != rhs.count {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
@@ -421,8 +421,8 @@ extension Heartbeat_HeartbeatCount: SwiftProtobuf.Message, SwiftProtobuf._Messag
 }
 
 extension Heartbeat_Heartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".Heartbeat"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".Heartbeat"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "timestamp"),
     3: .same(proto: "client"),
@@ -457,7 +457,7 @@ extension Heartbeat_Heartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     return _storage
   }
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     _ = _uniqueStorage()
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       while let fieldNumber = try decoder.nextFieldNumber() {
@@ -476,7 +476,7 @@ extension Heartbeat_Heartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     try withExtendedLifetime(_storage) { (_storage: _StorageClass) in
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every if/case branch local when no optimizations
@@ -501,7 +501,7 @@ extension Heartbeat_Heartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_Heartbeat, rhs: Heartbeat_Heartbeat) -> Bool {
+  public static func ==(lhs: Heartbeat_Heartbeat, rhs: Heartbeat_Heartbeat) -> Bool {
     if lhs._storage !== rhs._storage {
       let storagesAreEqual: Bool = withExtendedLifetime((lhs._storage, rhs._storage)) { (_args: (_StorageClass, _StorageClass)) in
         let _storage = _args.0
@@ -521,14 +521,14 @@ extension Heartbeat_Heartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageImpl
 }
 
 extension Heartbeat_HeartbeatClient: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".HeartbeatClient"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".HeartbeatClient"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "name"),
     3: .same(proto: "version"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -542,7 +542,7 @@ extension Heartbeat_HeartbeatClient: SwiftProtobuf.Message, SwiftProtobuf._Messa
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -555,7 +555,7 @@ extension Heartbeat_HeartbeatClient: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_HeartbeatClient, rhs: Heartbeat_HeartbeatClient) -> Bool {
+  public static func ==(lhs: Heartbeat_HeartbeatClient, rhs: Heartbeat_HeartbeatClient) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.name != rhs.name {return false}
     if lhs.version != rhs.version {return false}
@@ -565,8 +565,8 @@ extension Heartbeat_HeartbeatClient: SwiftProtobuf.Message, SwiftProtobuf._Messa
 }
 
 extension Heartbeat_HeartbeatDevice: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".HeartbeatDevice"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".HeartbeatDevice"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "id"),
     2: .same(proto: "name"),
     3: .same(proto: "os"),
@@ -575,7 +575,7 @@ extension Heartbeat_HeartbeatDevice: SwiftProtobuf.Message, SwiftProtobuf._Messa
     6: .same(proto: "language"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -592,7 +592,7 @@ extension Heartbeat_HeartbeatDevice: SwiftProtobuf.Message, SwiftProtobuf._Messa
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.id.isEmpty {
       try visitor.visitSingularStringField(value: self.id, fieldNumber: 1)
     }
@@ -614,7 +614,7 @@ extension Heartbeat_HeartbeatDevice: SwiftProtobuf.Message, SwiftProtobuf._Messa
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_HeartbeatDevice, rhs: Heartbeat_HeartbeatDevice) -> Bool {
+  public static func ==(lhs: Heartbeat_HeartbeatDevice, rhs: Heartbeat_HeartbeatDevice) -> Bool {
     if lhs.id != rhs.id {return false}
     if lhs.name != rhs.name {return false}
     if lhs.os != rhs.os {return false}
@@ -627,8 +627,8 @@ extension Heartbeat_HeartbeatDevice: SwiftProtobuf.Message, SwiftProtobuf._Messa
 }
 
 extension Heartbeat_HeartbeatLocation: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".HeartbeatLocation"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".HeartbeatLocation"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "ip"),
     2: .same(proto: "city"),
     3: .same(proto: "region"),
@@ -640,7 +640,7 @@ extension Heartbeat_HeartbeatLocation: SwiftProtobuf.Message, SwiftProtobuf._Mes
     9: .same(proto: "timezone"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -660,7 +660,7 @@ extension Heartbeat_HeartbeatLocation: SwiftProtobuf.Message, SwiftProtobuf._Mes
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -695,7 +695,7 @@ extension Heartbeat_HeartbeatLocation: SwiftProtobuf.Message, SwiftProtobuf._Mes
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_HeartbeatLocation, rhs: Heartbeat_HeartbeatLocation) -> Bool {
+  public static func ==(lhs: Heartbeat_HeartbeatLocation, rhs: Heartbeat_HeartbeatLocation) -> Bool {
     if lhs._ip != rhs._ip {return false}
     if lhs._city != rhs._city {return false}
     if lhs._region != rhs._region {return false}
@@ -711,13 +711,13 @@ extension Heartbeat_HeartbeatLocation: SwiftProtobuf.Message, SwiftProtobuf._Mes
 }
 
 extension Heartbeat_newHeartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".newHeartbeat"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".newHeartbeat"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "client"),
     2: .same(proto: "device"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -730,7 +730,7 @@ extension Heartbeat_newHeartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     // The use of inline closures is to circumvent an issue where the compiler
     // allocates stack space for every if/case branch local when no optimizations
     // are enabled. https://github.com/apple/swift-protobuf/issues/1034 and
@@ -744,7 +744,7 @@ extension Heartbeat_newHeartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_newHeartbeat, rhs: Heartbeat_newHeartbeat) -> Bool {
+  public static func ==(lhs: Heartbeat_newHeartbeat, rhs: Heartbeat_newHeartbeat) -> Bool {
     if lhs._client != rhs._client {return false}
     if lhs._device != rhs._device {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
@@ -753,12 +753,12 @@ extension Heartbeat_newHeartbeat: SwiftProtobuf.Message, SwiftProtobuf._MessageI
 }
 
 extension Heartbeat_result: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
-  static let protoMessageName: String = _protobuf_package + ".result"
-  static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
+  public static let protoMessageName: String = _protobuf_package + ".result"
+  public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "status"),
   ]
 
-  mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
+  public mutating func decodeMessage<D: SwiftProtobuf.Decoder>(decoder: inout D) throws {
     while let fieldNumber = try decoder.nextFieldNumber() {
       // The use of inline closures is to circumvent an issue where the compiler
       // allocates stack space for every case branch when no optimizations are
@@ -770,14 +770,14 @@ extension Heartbeat_result: SwiftProtobuf.Message, SwiftProtobuf._MessageImpleme
     }
   }
 
-  func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
+  public func traverse<V: SwiftProtobuf.Visitor>(visitor: inout V) throws {
     if !self.status.isEmpty {
       try visitor.visitSingularStringField(value: self.status, fieldNumber: 1)
     }
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  static func ==(lhs: Heartbeat_result, rhs: Heartbeat_result) -> Bool {
+  public static func ==(lhs: Heartbeat_result, rhs: Heartbeat_result) -> Bool {
     if lhs.status != rhs.status {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import HeartbeatKit
 
 class ViewController: UIViewController {
 

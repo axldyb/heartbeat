@@ -1,6 +1,6 @@
 //
 //  Bundle+extensions.swift
-//  Heartbeat
+//  HeartbeatKit
 //
 //  Created by Aksel Dybdal on 07/11/2021.
 //

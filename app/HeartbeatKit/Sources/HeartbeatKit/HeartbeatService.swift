@@ -1,6 +1,6 @@
 //
 //  HeartbeatService.swift
-//  Heartbeat
+//  HeartbeatKit
 //
 //  Created by Aksel Dybdal on 07/11/2021.
 //
@@ -10,19 +10,19 @@ import GRPC
 import NIO
 import UIKit
 
-class HeartbeatService {
+public class HeartbeatService {
 
     private let group: MultiThreadedEventLoopGroup
     private let channel: GRPCChannel
     private let serviceClient: Heartbeat_HeartbeatServiceClient
     fileprivate let heartbeatQueue = DispatchQueue(label: "axldyb.Heartbeat")
 
-    init() {
+    public init() {
         group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
         // Configure the channel, we're not using TLS so the connection is `insecure`.
         channel = try! GRPCChannelPool.with(
-          target: .host("localhost", port: 9090),
+          target: .host("heartbeat.axldyb.com", port: 9090),
           transportSecurity: .plaintext,
           eventLoopGroup: group
         )
@@ -40,9 +40,9 @@ class HeartbeatService {
     }
 }
 
-extension HeartbeatService {
+public extension HeartbeatService {
 
-    func createHeartbeat() {
+    public func createHeartbeat() {
         let client = Heartbeat_HeartbeatClient.with { c in
             c.id = Bundle.main.bundleIdentifier ?? "<unknown>"
             c.name = Bundle.main.displayName ?? "<unknown>"
@@ -78,7 +78,7 @@ extension HeartbeatService {
         }
     }
 
-    func listHeartbeats(handler: @escaping (Heartbeat_HeartbeatList?) -> Void) {
+    public func listHeartbeats(handler: @escaping (Heartbeat_HeartbeatList?) -> Void) {
         heartbeatQueue.async { [weak self] in
             guard let aSelf = self else {
                 handler(nil)
@@ -100,7 +100,7 @@ extension HeartbeatService {
         }
     }
 
-    func streamHeartbeatCount(handler: @escaping (Heartbeat_HeartbeatCount) -> Void) {
+    public func streamHeartbeatCount(handler: @escaping (Heartbeat_HeartbeatCount) -> Void) {
         heartbeatQueue.async { [weak self] in
             guard let aSelf = self else {
                 return

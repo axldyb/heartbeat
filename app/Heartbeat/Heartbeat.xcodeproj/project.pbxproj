@@ -13,14 +13,7 @@
 		9C243AE82736CAF200C97636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C243AE62736CAF200C97636 /* Main.storyboard */; };
 		9C243AEA2736CAF400C97636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C243AE92736CAF400C97636 /* Assets.xcassets */; };
 		9C243AED2736CAF400C97636 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C243AEB2736CAF400C97636 /* LaunchScreen.storyboard */; };
-		9C243AF62736D60F00C97636 /* CGRPCZlib in Frameworks */ = {isa = PBXBuildFile; productRef = 9C243AF52736D60F00C97636 /* CGRPCZlib */; };
-		9C243AF82736D60F00C97636 /* GRPC in Frameworks */ = {isa = PBXBuildFile; productRef = 9C243AF72736D60F00C97636 /* GRPC */; };
-		9C243B052736E7A000C97636 /* heartbeat.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243B032736E7A000C97636 /* heartbeat.grpc.swift */; };
-		9C243B062736E7A000C97636 /* heartbeat.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243B042736E7A000C97636 /* heartbeat.pb.swift */; };
-		9C243B082737E68700C97636 /* HeartbeatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243B072737E68700C97636 /* HeartbeatService.swift */; };
-		9C243B0A2738578500C97636 /* UIDevice+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243B092738578400C97636 /* UIDevice+extensions.swift */; };
-		9C243B0C27385AE500C97636 /* Bundle+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243B0B27385AE500C97636 /* Bundle+extensions.swift */; };
-		9C243B0E2738679900C97636 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243B0D2738679900C97636 /* Keychain.swift */; };
+		9CDF351F2770C245005E1253 /* HeartbeatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CDF351E2770C245005E1253 /* HeartbeatKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,12 +25,7 @@
 		9C243AE92736CAF400C97636 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C243AEC2736CAF400C97636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C243AEE2736CAF400C97636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9C243B032736E7A000C97636 /* heartbeat.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = heartbeat.grpc.swift; path = Heartbeat/proto/heartbeat.grpc.swift; sourceTree = SOURCE_ROOT; };
-		9C243B042736E7A000C97636 /* heartbeat.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = heartbeat.pb.swift; path = Heartbeat/proto/heartbeat.pb.swift; sourceTree = SOURCE_ROOT; };
-		9C243B072737E68700C97636 /* HeartbeatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatService.swift; sourceTree = "<group>"; };
-		9C243B092738578400C97636 /* UIDevice+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+extensions.swift"; sourceTree = "<group>"; };
-		9C243B0B27385AE500C97636 /* Bundle+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extensions.swift"; sourceTree = "<group>"; };
-		9C243B0D2738679900C97636 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		9C62371C276F96900007F768 /* HeartbeatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HeartbeatKit; path = ../HeartbeatKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,8 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C243AF82736D60F00C97636 /* GRPC in Frameworks */,
-				9C243AF62736D60F00C97636 /* CGRPCZlib in Frameworks */,
+				9CDF351F2770C245005E1253 /* HeartbeatKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,8 +43,10 @@
 		9C243AD42736CAF200C97636 = {
 			isa = PBXGroup;
 			children = (
+				9C62371C276F96900007F768 /* HeartbeatKit */,
 				9C243ADF2736CAF200C97636 /* Heartbeat */,
 				9C243ADE2736CAF200C97636 /* Products */,
+				9CDF351D2770C245005E1253 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -72,7 +61,6 @@
 		9C243ADF2736CAF200C97636 /* Heartbeat */ = {
 			isa = PBXGroup;
 			children = (
-				9C243B022736E78800C97636 /* protoc */,
 				9C243AE02736CAF200C97636 /* AppDelegate.swift */,
 				9C243AE22736CAF200C97636 /* SceneDelegate.swift */,
 				9C243AE42736CAF200C97636 /* ViewController.swift */,
@@ -80,21 +68,15 @@
 				9C243AE92736CAF400C97636 /* Assets.xcassets */,
 				9C243AEB2736CAF400C97636 /* LaunchScreen.storyboard */,
 				9C243AEE2736CAF400C97636 /* Info.plist */,
-				9C243B072737E68700C97636 /* HeartbeatService.swift */,
-				9C243B092738578400C97636 /* UIDevice+extensions.swift */,
-				9C243B0B27385AE500C97636 /* Bundle+extensions.swift */,
-				9C243B0D2738679900C97636 /* Keychain.swift */,
 			);
 			path = Heartbeat;
 			sourceTree = "<group>";
 		};
-		9C243B022736E78800C97636 /* protoc */ = {
+		9CDF351D2770C245005E1253 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9C243B032736E7A000C97636 /* heartbeat.grpc.swift */,
-				9C243B042736E7A000C97636 /* heartbeat.pb.swift */,
 			);
-			path = protoc;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -114,8 +96,7 @@
 			);
 			name = Heartbeat;
 			packageProductDependencies = (
-				9C243AF52736D60F00C97636 /* CGRPCZlib */,
-				9C243AF72736D60F00C97636 /* GRPC */,
+				9CDF351E2770C245005E1253 /* HeartbeatKit */,
 			);
 			productName = Heartbeat;
 			productReference = 9C243ADD2736CAF200C97636 /* Heartbeat.app */;
@@ -146,7 +127,6 @@
 			);
 			mainGroup = 9C243AD42736CAF200C97636;
 			packageReferences = (
-				9C243AF42736D60F00C97636 /* XCRemoteSwiftPackageReference "grpc-swift" */,
 			);
 			productRefGroup = 9C243ADE2736CAF200C97636 /* Products */;
 			projectDirPath = "";
@@ -175,15 +155,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C243B082737E68700C97636 /* HeartbeatService.swift in Sources */,
 				9C243AE52736CAF200C97636 /* ViewController.swift in Sources */,
-				9C243B052736E7A000C97636 /* heartbeat.grpc.swift in Sources */,
 				9C243AE12736CAF200C97636 /* AppDelegate.swift in Sources */,
 				9C243AE32736CAF200C97636 /* SceneDelegate.swift in Sources */,
-				9C243B0E2738679900C97636 /* Keychain.swift in Sources */,
-				9C243B0A2738578500C97636 /* UIDevice+extensions.swift in Sources */,
-				9C243B062736E7A000C97636 /* heartbeat.pb.swift in Sources */,
-				9C243B0C27385AE500C97636 /* Bundle+extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +314,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -368,6 +343,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -404,27 +380,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		9C243AF42736D60F00C97636 /* XCRemoteSwiftPackageReference "grpc-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/grpc/grpc-swift.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		9C243AF52736D60F00C97636 /* CGRPCZlib */ = {
+		9CDF351E2770C245005E1253 /* HeartbeatKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 9C243AF42736D60F00C97636 /* XCRemoteSwiftPackageReference "grpc-swift" */;
-			productName = CGRPCZlib;
-		};
-		9C243AF72736D60F00C97636 /* GRPC */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9C243AF42736D60F00C97636 /* XCRemoteSwiftPackageReference "grpc-swift" */;
-			productName = GRPC;
+			productName = HeartbeatKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
