@@ -1,5 +1,5 @@
 # Heartbeat
-Heartbeat is a demo project I created to experiment with gRPC. The idea is a simple server accepting heartbeats, alive messages, from clients.
+Heartbeat is a demo project I created to experiment with [gRPC](https://www.grpc.io). The idea is a simple server accepting heartbeats, alive messages, from clients.
 
 # protoc
 To generate Protocol Buffer support code I used `protoc` plugins. The script `/proto/generate-types.sh` is used every time we make changes to the `heartbeat.proto` file. This will update the generated types and services for the different applications.
