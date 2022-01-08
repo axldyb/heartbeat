@@ -19,10 +19,13 @@ export class IpInfoService {
     public async getIpInfo(ip: string): Promise<IpInfo | null> {
         try {
             const info = await ipInfo(ip, process.env.IPINFO_API_TOKEN)
+            this.logger.info('IP info: ' + JSON.stringify(info, null, 2))
+
             if (info.bogon) {
+                this.logger.info('IP info: BOGON')
                 return null
             }
-            this.logger.error('IP info: ' + JSON.stringify(info, null, 2))
+
             return info
         } catch (error) {
             this.logger.error('Error getting IP info: ' + error)

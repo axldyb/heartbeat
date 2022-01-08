@@ -49,6 +49,7 @@ services:
       - POSTGRES_USER
       - POSTGRES_DB
       - POSTGRES_PORT
+      - IPINFO_API_TOKEN
 
   rest-api:
     build:
