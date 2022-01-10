@@ -12,7 +12,7 @@ export const createHeartbeatSchema: { [requestProperty: string]: {} } = {
                 },
                 name: {
                     type: 'string',
-                    minLength: 4,
+                    minLength: 2,
                     maxLength: 128,
                 },
                 version: {
