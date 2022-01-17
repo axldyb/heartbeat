@@ -4,9 +4,12 @@ import { heartbeatsRouter } from './routes/heartbeats'
 import { RouteLoggerMiddleware } from './utils/route-logger-middleware'
 
 const routeLogger = new RouteLoggerMiddleware()
+const cors = require('cors')
+
 
 // express
 const app = express()
+app.use(cors)
 app.use(routeLogger.middlewareFunc)
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
