@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 // service definition
 
 service HeartbeatService {
-  rpc listHeartbeats(Empty) returns (HeartbeatList) {}
+  rpc listHeartbeats(QueryParams) returns (HeartbeatList) {}
   rpc readHeartbeat(HeartbeatId) returns (Heartbeat) {}
   rpc createHeartbeat(newHeartbeat) returns (result) {}
   rpc streamHeartbeatCount(Empty) returns (stream HeartbeatCount) {}
@@ -70,4 +70,13 @@ message newHeartbeat {
 
 message result {
   string status = 1;
+}
+
+message QueryParams {
+  repeated QueryParam queryParams = 1;
+}
+
+message QueryParam {
+  string name = 1;
+  string value = 2;
 }

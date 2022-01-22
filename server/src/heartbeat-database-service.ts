@@ -6,6 +6,7 @@ import { HeartbeatSerializer } from './heartbeat-serializer'
 import { Logger } from './utils/logger'
 import * as knexConfig from '../knexfile'
 import { IpInfoService } from './ip-info-service'
+import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
 
 export enum Environment {
     development = 'development',
@@ -28,8 +29,21 @@ export class HeartbeatDatabaseService {
         this.ipInfoService = ipInfoService
     }
 
-    public async getHeartbeats(): Promise<Heartbeat[]> {
-        const heartbeats = await this.databaseClient(TableName.heartbeats)
+    public async getHeartbeats(queryParams: QueryParams): Promise<Heartbeat[]> {
+        var query = this.databaseClient(TableName.heartbeats)
+
+        // TODO: Extract into separate method.
+        if (queryParams.queryParams) {
+            for (const param of queryParams.queryParams) {
+                if (param.name === 'startAfter' && param.value) {
+                    query = query.where('timestamp', '>=', param.value)
+                } else {
+                    this.logger.info(`unknown query param passed: ${param.name} - ${param.value}`)
+                }
+            }
+        }
+
+        const heartbeats = await query
         return heartbeats.map(HeartbeatSerializer.serializeDatabaseObjectToHeartbeat)
     }
 

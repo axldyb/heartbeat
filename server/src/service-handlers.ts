@@ -14,6 +14,7 @@ import { Logger } from './utils/logger'
 import { Socket } from '@supabase/realtime-js'
 import { HeartbeatStream } from './heartbeat-stream'
 import { IpInfoService } from './ip-info-service'
+import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
 
 export class ServiceHandler {
 
@@ -55,12 +56,12 @@ export class ServiceHandler {
         }
     }
 
-    public async listHeartbeats(call: ServerUnaryCall<Empty, HeartbeatList>, callback: sendUnaryData<HeartbeatList>) {
+    public async listHeartbeats(call: ServerUnaryCall<QueryParams, HeartbeatList>, callback: sendUnaryData<HeartbeatList>) {
         if (call.request) {
             this.logger.info(`list heartbeats: ${JSON.stringify(call.request, null, 2)}`)
         }
         try {
-            const heartbeats = await this.databaseService.getHeartbeats()
+            const heartbeats = await this.databaseService.getHeartbeats(call.request)
             callback(null, { heartbeats: heartbeats })
         } catch (err) {
             callback(new Error('Unable to list heartbeats: ' + err), null)

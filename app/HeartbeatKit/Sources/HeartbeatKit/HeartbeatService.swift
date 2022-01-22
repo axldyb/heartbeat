@@ -42,7 +42,7 @@ public class HeartbeatService {
 
 public extension HeartbeatService {
 
-    public func createHeartbeat() {
+    func createHeartbeat() {
         let client = Heartbeat_HeartbeatClient.with { c in
             c.id = Bundle.main.bundleIdentifier ?? "<unknown>"
             c.name = Bundle.main.displayName ?? "<unknown>"
@@ -78,14 +78,14 @@ public extension HeartbeatService {
         }
     }
 
-    public func listHeartbeats(handler: @escaping (Heartbeat_HeartbeatList?) -> Void) {
+    func listHeartbeats(handler: @escaping (Heartbeat_HeartbeatList?) -> Void) {
         heartbeatQueue.async { [weak self] in
             guard let aSelf = self else {
                 handler(nil)
                 return
             }
 
-            let data = Heartbeat_Empty()
+            let data = Heartbeat_QueryParams()
             let request = aSelf.serviceClient.listHeartbeats(data)
 
             DispatchQueue.main.async {
@@ -100,7 +100,7 @@ public extension HeartbeatService {
         }
     }
 
-    public func streamHeartbeatCount(handler: @escaping (Heartbeat_HeartbeatCount) -> Void) {
+    func streamHeartbeatCount(handler: @escaping (Heartbeat_HeartbeatCount) -> Void) {
         heartbeatQueue.async { [weak self] in
             guard let aSelf = self else {
                 return

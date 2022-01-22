@@ -17,7 +17,12 @@ const client = getClient()
 // handlers
 const listHeartbeats = (req: Request, res: Response) => {
     console.log('list heartbeats')
-    client.listHeartbeats({}, (err, result) => {
+
+    const queryParms = {
+        queryParams: [] // add them here
+    }
+
+    client.listHeartbeats(queryParms, (err, result) => {
         res.json(result)
     })
 }

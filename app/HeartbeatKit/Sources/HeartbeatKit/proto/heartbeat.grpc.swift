@@ -31,9 +31,9 @@ internal protocol Heartbeat_HeartbeatServiceClientProtocol: GRPCClient {
   var interceptors: Heartbeat_HeartbeatServiceClientInterceptorFactoryProtocol? { get }
 
   func listHeartbeats(
-    _ request: Heartbeat_Empty,
+    _ request: Heartbeat_QueryParams,
     callOptions: CallOptions?
-  ) -> UnaryCall<Heartbeat_Empty, Heartbeat_HeartbeatList>
+  ) -> UnaryCall<Heartbeat_QueryParams, Heartbeat_HeartbeatList>
 
   func readHeartbeat(
     _ request: Heartbeat_HeartbeatId,
@@ -64,9 +64,9 @@ extension Heartbeat_HeartbeatServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   internal func listHeartbeats(
-    _ request: Heartbeat_Empty,
+    _ request: Heartbeat_QueryParams,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Heartbeat_Empty, Heartbeat_HeartbeatList> {
+  ) -> UnaryCall<Heartbeat_QueryParams, Heartbeat_HeartbeatList> {
     return self.makeUnaryCall(
       path: "/heartbeat.HeartbeatService/listHeartbeats",
       request: request,
@@ -136,7 +136,7 @@ extension Heartbeat_HeartbeatServiceClientProtocol {
 internal protocol Heartbeat_HeartbeatServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'listHeartbeats'.
-  func makelistHeartbeatsInterceptors() -> [ClientInterceptor<Heartbeat_Empty, Heartbeat_HeartbeatList>]
+  func makelistHeartbeatsInterceptors() -> [ClientInterceptor<Heartbeat_QueryParams, Heartbeat_HeartbeatList>]
 
   /// - Returns: Interceptors to use when invoking 'readHeartbeat'.
   func makereadHeartbeatInterceptors() -> [ClientInterceptor<Heartbeat_HeartbeatId, Heartbeat_Heartbeat>]

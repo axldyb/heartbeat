@@ -12,6 +12,7 @@ import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
 import { IpInfoService } from './ip-info-service'
+import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
 
 const environment = process.env.NODE_ENV || 'development'
 const inInfoService = new IpInfoService()
@@ -23,7 +24,7 @@ const handlers: HeartbeatServiceHandlers = {
     createHeartbeat(call: ServerUnaryCall<newHeartbeat, result>, callback: sendUnaryData<result>) {
         return serviceHandler.createHeartbeat(call, callback)
     },
-    listHeartbeats(call: ServerUnaryCall<Empty, HeartbeatList>, callback: sendUnaryData<HeartbeatList>) {
+    listHeartbeats(call: ServerUnaryCall<QueryParams, HeartbeatList>, callback: sendUnaryData<HeartbeatList>) {
         return serviceHandler.listHeartbeats(call, callback)
     },
     readHeartbeat(call: ServerUnaryCall<HeartbeatId, Heartbeat>, callback: sendUnaryData<Heartbeat>) {
