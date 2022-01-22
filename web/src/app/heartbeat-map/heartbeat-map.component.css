@@ -1,0 +1,52 @@
+.heartbeat-map-header {
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.heartbeat-counter {
+    color: #fff;
+    margin: 15px;
+}
+
+.heartbeat-map {
+    height: 100%;
+    width: 100%;
+}
+
+mgl-map {
+    height: 100%;
+    width: 100%;
+}
+
+.marker-cluster {
+    color: #fff;
+    background: #1978c8;
+    border-radius: 50%;
+    border-color: blue;
+    border-width: 2px;
+    border-style: solid;
+    height: 20px;
+    width: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.marker {
+    color: #fff;
+    background: rgb(139, 55, 55);
+    border-radius: 50%;
+    border-color: red;
+    border-width: 2px;
+    border-style: solid;
+    height: 20px;
+    width: 20px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

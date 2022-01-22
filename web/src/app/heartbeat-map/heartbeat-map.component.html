@@ -1,0 +1,33 @@
+<div class="heartbeat-map-header">
+    <div class="heartbeat-counter">Heartbeat count: {{ heartbeatsCount}}</div>
+</div>
+<div class="heartbeat-map">
+    <mgl-map [style]="'mapbox://styles/mapbox/dark-v9'" [zoom]="[4]" [center]="[10.5, 50]">
+        <mgl-control>Heartbeat™</mgl-control>
+        <mgl-control mglNavigation></mgl-control>
+        <mgl-control mglScale unit="metric" position="top-right"></mgl-control>
+
+        <mgl-geojson-source #clusterComponent id="heartbeats" [data]="heartbeats" [cluster]="true" [clusterRadius]="25"
+            [clusterMaxZoom]="14">
+        </mgl-geojson-source>
+
+        <mgl-markers-for-clusters source="heartbeats">
+            <ng-template mglPoint let-feature>
+                <div class="marker" [title]="feature.properties.subTitle">
+                    1
+                </div>
+            </ng-template>
+            <ng-template mglClusterPoint let-feature>
+                <div class="marker-cluster" [title]="feature.properties" (click)="selectCluster($event, feature)">
+                    {{ feature.properties?.point_count }}
+                </div>
+            </ng-template>
+        </mgl-markers-for-clusters>
+
+        <mgl-popup *ngIf="selectedCluster" [feature]="selectedCluster">
+            <showcase-cluster-popup [clusterComponent]="clusterComponent" [selectedCluster]="selectedCluster">
+            </showcase-cluster-popup>
+        </mgl-popup>
+
+    </mgl-map>
+</div>
