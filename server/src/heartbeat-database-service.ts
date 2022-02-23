@@ -82,4 +82,15 @@ export class HeartbeatDatabaseService {
         const result = await this.databaseClient(TableName.heartbeats).count()
         return result[0] ? result[0].count : 0
     }
+
+    public async getLastHeartbeat(): Promise<Heartbeat | null> {
+        const data = await this.databaseClient(TableName.heartbeats).orderBy('timestamp', 'desc').limit(1)
+        if (data.length) {
+            const heartbeat = HeartbeatSerializer.serializeDatabaseObjectToHeartbeat(data[0])
+            return heartbeat
+        } else {
+            this.logger.warning(`No Heartbeats found for last Heartbeat`)
+            return null
+        }
+    }
 }

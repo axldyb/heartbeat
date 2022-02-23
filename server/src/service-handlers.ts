@@ -12,9 +12,10 @@ import { SchemaValidator } from './utils/schema-validator'
 import { createHeartbeatSchema } from './schemas/create-heartbeat-schema'
 import { Logger } from './utils/logger'
 import { Socket } from '@supabase/realtime-js'
-import { HeartbeatStream } from './heartbeat-stream'
+import { HeartbeatCountStream } from './heartbeat-count-stream'
 import { IpInfoService } from './ip-info-service'
 import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
+import { LastHeartbeatStream } from './last-heartbeat-stream'
 
 export class ServiceHandler {
 
@@ -23,7 +24,8 @@ export class ServiceHandler {
     private ipInfoService: IpInfoService
     private socket: Socket
     private logger = new Logger('ServiceHandler')
-    private streams: HeartbeatStream[] = []
+    private countHeartbeatStreams: HeartbeatCountStream[] = []
+    private lastHeartbeatStreams: LastHeartbeatStream[] = []
 
     constructor(databaseService: HeartbeatDatabaseService, schemaValidator: SchemaValidator, ipInfoService: IpInfoService) {
         this.databaseService = databaseService
@@ -101,8 +103,25 @@ export class ServiceHandler {
             count: count
         })
 
-        const stream = new HeartbeatStream(call)
-        this.streams.push(stream)
+        const stream = new HeartbeatCountStream(call)
+        this.countHeartbeatStreams.push(stream)
+    }
+
+    public async streamLastHeartbeat(call: ServerWritableStream<Empty, Heartbeat>) {
+        if (call.request) {
+            this.logger.info(`stream heartbeats: ${JSON.stringify(call.request, null, 2)}`)
+        }
+
+        // Send the initial count. The listeners below will only trigger on changes.
+        const heartbeat = await this.databaseService.getLastHeartbeat()
+        if (heartbeat) {
+            call.write(heartbeat)
+        } else {
+            this.logger.error('no last heartbeat')
+        }
+
+        const stream = new LastHeartbeatStream(call)
+        this.lastHeartbeatStreams.push(stream)
     }
 
     private connectSocket() {
@@ -129,25 +148,53 @@ export class ServiceHandler {
             })
 
         heartbeatTableListener.on('INSERT', async (change) => {
-            const count = await this.databaseService.countHeartbeats()
-
-            this.logger.info(`new heartbeat count: ${count}`)
-
-            this.streams.forEach(stream => {
-                const didWrite = stream.call.write({
-                    count: count
-                })
-
-                // If the write failed we interpret that as a disconnected client.
-                // We then mark the stream as not active
-                if (!didWrite) {
-                    this.logger.info(`Canceling stream after failed write to client call`)
-                    stream.active = false
-                }
-            })
-
-            // Remove no longer active streams
-            this.streams = this.streams.filter(stream => stream.active)
+            await this.updateHeartbeatCountStreams()
+            await this.updateLastHeartbeatStreams()
         })
     }
+
+    private async updateHeartbeatCountStreams() {
+        const count = await this.databaseService.countHeartbeats()
+
+        this.logger.info(`new heartbeat count: ${count}`)
+
+        this.countHeartbeatStreams.forEach(stream => {
+            const didWrite = stream.call.write({
+                count: count
+            })
+
+            // If the write failed we interpret that as a disconnected client.
+            // We then mark the stream as not active
+            if (!didWrite) {
+                this.logger.info(`Canceling stream after failed write to client call`)
+                stream.active = false
+            }
+        })
+
+        // Remove no longer active streams
+        this.countHeartbeatStreams = this.countHeartbeatStreams.filter(stream => stream.active)
+    }
+
+    private async updateLastHeartbeatStreams() {
+        const heartbeat = await this.databaseService.getLastHeartbeat()
+        if (!heartbeat) {
+            this.logger.error('no last heartbeat')
+            return
+        }
+
+        this.lastHeartbeatStreams.forEach(stream => {
+            const didWrite = stream.call.write(heartbeat)
+
+            // If the write failed we interpret that as a disconnected client.
+            // We then mark the stream as not active
+            if (!didWrite) {
+                this.logger.info(`Canceling stream after failed write to client call`)
+                stream.active = false
+            }
+        })
+
+        // Remove no longer active streams
+        this.lastHeartbeatStreams = this.lastHeartbeatStreams.filter(stream => stream.active)
+    }
+
 }

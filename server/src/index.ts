@@ -13,6 +13,7 @@ import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
 import { IpInfoService } from './ip-info-service'
 import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
+import { LastHeartbeatStream } from './last-heartbeat-stream'
 
 const environment = process.env.NODE_ENV || 'development'
 const inInfoService = new IpInfoService()
@@ -32,6 +33,9 @@ const handlers: HeartbeatServiceHandlers = {
     },
     streamHeartbeatCount(call: ServerWritableStream<Empty, HeartbeatCount>) {
         return serviceHandler.streamHeartbeatCount(call)
+    },
+    streamLastHeartbeat(call: ServerWritableStream<Empty, Heartbeat>) {
+        return serviceHandler.streamLastHeartbeat(call)
     }
 }
 

@@ -2,7 +2,7 @@ import { ServerWritableStream } from '@grpc/grpc-js'
 import { Empty } from '../proto/heartbeat/Empty'
 import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 
-export class HeartbeatStream {
+export class HeartbeatCountStream {
     call: ServerWritableStream<Empty, HeartbeatCount>
     active: boolean
 
