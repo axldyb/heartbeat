@@ -6,7 +6,7 @@ import { HeartbeatSerializer } from './heartbeat-serializer'
 import { Logger } from './utils/logger'
 import * as knexConfig from '../knexfile'
 import { IpInfoService } from './ip-info-service'
-import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
+import { QueryParams } from '../proto/heartbeat/QueryParams'
 
 export enum Environment {
     development = 'development',

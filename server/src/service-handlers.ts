@@ -14,7 +14,7 @@ import { Logger } from './utils/logger'
 import { Socket } from '@supabase/realtime-js'
 import { HeartbeatCountStream } from './heartbeat-count-stream'
 import { IpInfoService } from './ip-info-service'
-import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
+import { QueryParams } from '../proto/heartbeat/QueryParams'
 import { LastHeartbeatStream } from './last-heartbeat-stream'
 
 export class ServiceHandler {

@@ -12,8 +12,7 @@ import { HeartbeatCount } from '../proto/heartbeat/HeartbeatCount'
 import { HeartbeatServiceHandlers } from '../proto/heartbeat/HeartbeatService'
 import { SchemaValidator } from './utils/schema-validator'
 import { IpInfoService } from './ip-info-service'
-import { QueryParams } from '../../rest-api/proto/heartbeat/QueryParams'
-import { LastHeartbeatStream } from './last-heartbeat-stream'
+import { QueryParams } from '../proto/heartbeat/QueryParams'
 
 const environment = process.env.NODE_ENV || 'development'
 const inInfoService = new IpInfoService()
