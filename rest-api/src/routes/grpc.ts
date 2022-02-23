@@ -3,6 +3,7 @@ import * as grpc from '@grpc/grpc-js'
 import { ProtoGrpcType } from '../../proto/heartbeat'
 import { Request, Response } from 'express'
 import { HeartbeatServiceClient } from '../../proto/heartbeat/HeartbeatService'
+import { QueryParams } from '../../proto/heartbeat/QueryParams'
 
 function getClient(): HeartbeatServiceClient {
     const packageDefinition = protoLoader.loadSync('./proto/heartbeat.proto')
@@ -18,8 +19,13 @@ const client = getClient()
 const listHeartbeats = (req: Request, res: Response) => {
     console.log('list heartbeats')
 
-    const queryParms = {
-        queryParams: [] // add them here
+    const queryParms: QueryParams = {
+        queryParams: Object.entries(req.params).map((entry) => {
+            return {
+                name: entry[0],
+                value: entry[1]
+            }
+        })
     }
 
     client.listHeartbeats(queryParms, (err, result) => {
