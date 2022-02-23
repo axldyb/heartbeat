@@ -50,6 +50,12 @@ internal protocol Heartbeat_HeartbeatServiceClientProtocol: GRPCClient {
     callOptions: CallOptions?,
     handler: @escaping (Heartbeat_HeartbeatCount) -> Void
   ) -> ServerStreamingCall<Heartbeat_Empty, Heartbeat_HeartbeatCount>
+
+  func streamLastHeartbeat(
+    _ request: Heartbeat_Empty,
+    callOptions: CallOptions?,
+    handler: @escaping (Heartbeat_Heartbeat) -> Void
+  ) -> ServerStreamingCall<Heartbeat_Empty, Heartbeat_Heartbeat>
 }
 
 extension Heartbeat_HeartbeatServiceClientProtocol {
@@ -131,6 +137,27 @@ extension Heartbeat_HeartbeatServiceClientProtocol {
       handler: handler
     )
   }
+
+  /// Server streaming call to streamLastHeartbeat
+  ///
+  /// - Parameters:
+  ///   - request: Request to send to streamLastHeartbeat.
+  ///   - callOptions: Call options.
+  ///   - handler: A closure called when each response is received from the server.
+  /// - Returns: A `ServerStreamingCall` with futures for the metadata and status.
+  internal func streamLastHeartbeat(
+    _ request: Heartbeat_Empty,
+    callOptions: CallOptions? = nil,
+    handler: @escaping (Heartbeat_Heartbeat) -> Void
+  ) -> ServerStreamingCall<Heartbeat_Empty, Heartbeat_Heartbeat> {
+    return self.makeServerStreamingCall(
+      path: "/heartbeat.HeartbeatService/streamLastHeartbeat",
+      request: request,
+      callOptions: callOptions ?? self.defaultCallOptions,
+      interceptors: self.interceptors?.makestreamLastHeartbeatInterceptors() ?? [],
+      handler: handler
+    )
+  }
 }
 
 internal protocol Heartbeat_HeartbeatServiceClientInterceptorFactoryProtocol {
@@ -146,6 +173,9 @@ internal protocol Heartbeat_HeartbeatServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'streamHeartbeatCount'.
   func makestreamHeartbeatCountInterceptors() -> [ClientInterceptor<Heartbeat_Empty, Heartbeat_HeartbeatCount>]
+
+  /// - Returns: Interceptors to use when invoking 'streamLastHeartbeat'.
+  func makestreamLastHeartbeatInterceptors() -> [ClientInterceptor<Heartbeat_Empty, Heartbeat_Heartbeat>]
 }
 
 internal final class Heartbeat_HeartbeatServiceClient: Heartbeat_HeartbeatServiceClientProtocol {

@@ -44,6 +44,11 @@ export interface HeartbeatServiceClient extends grpc.Client {
   streamHeartbeatCount(argument: _heartbeat_Empty, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_heartbeat_HeartbeatCount__Output>;
   streamHeartbeatCount(argument: _heartbeat_Empty, options?: grpc.CallOptions): grpc.ClientReadableStream<_heartbeat_HeartbeatCount__Output>;
   
+  streamLastHeartbeat(argument: _heartbeat_Empty, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_heartbeat_Heartbeat__Output>;
+  streamLastHeartbeat(argument: _heartbeat_Empty, options?: grpc.CallOptions): grpc.ClientReadableStream<_heartbeat_Heartbeat__Output>;
+  streamLastHeartbeat(argument: _heartbeat_Empty, metadata: grpc.Metadata, options?: grpc.CallOptions): grpc.ClientReadableStream<_heartbeat_Heartbeat__Output>;
+  streamLastHeartbeat(argument: _heartbeat_Empty, options?: grpc.CallOptions): grpc.ClientReadableStream<_heartbeat_Heartbeat__Output>;
+  
 }
 
 export interface HeartbeatServiceHandlers extends grpc.UntypedServiceImplementation {
@@ -55,6 +60,8 @@ export interface HeartbeatServiceHandlers extends grpc.UntypedServiceImplementat
   
   streamHeartbeatCount: grpc.handleServerStreamingCall<_heartbeat_Empty__Output, _heartbeat_HeartbeatCount>;
   
+  streamLastHeartbeat: grpc.handleServerStreamingCall<_heartbeat_Empty__Output, _heartbeat_Heartbeat>;
+  
 }
 
 export interface HeartbeatServiceDefinition extends grpc.ServiceDefinition {
@@ -62,4 +69,5 @@ export interface HeartbeatServiceDefinition extends grpc.ServiceDefinition {
   listHeartbeats: MethodDefinition<_heartbeat_QueryParams, _heartbeat_HeartbeatList, _heartbeat_QueryParams__Output, _heartbeat_HeartbeatList__Output>
   readHeartbeat: MethodDefinition<_heartbeat_HeartbeatId, _heartbeat_Heartbeat, _heartbeat_HeartbeatId__Output, _heartbeat_Heartbeat__Output>
   streamHeartbeatCount: MethodDefinition<_heartbeat_Empty, _heartbeat_HeartbeatCount, _heartbeat_Empty__Output, _heartbeat_HeartbeatCount__Output>
+  streamLastHeartbeat: MethodDefinition<_heartbeat_Empty, _heartbeat_Heartbeat, _heartbeat_Empty__Output, _heartbeat_Heartbeat__Output>
 }

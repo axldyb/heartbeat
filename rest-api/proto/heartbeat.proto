@@ -10,6 +10,7 @@ service HeartbeatService {
   rpc readHeartbeat(HeartbeatId) returns (Heartbeat) {}
   rpc createHeartbeat(newHeartbeat) returns (result) {}
   rpc streamHeartbeatCount(Empty) returns (stream HeartbeatCount) {}
+  rpc streamLastHeartbeat(Empty) returns (stream Heartbeat) {}
 }
 
 // message type definitions
