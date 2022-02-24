@@ -16,7 +16,6 @@
 		9C37C2A627C532B1006E09D0 /* HeartbeatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A527C532B1006E09D0 /* HeartbeatApp.swift */; };
 		9C37C2A827C532D8006E09D0 /* HeartbeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */; };
 		9C37C2AA27C62C2A006E09D0 /* HeartbeatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */; };
-		9C37C2AC27C63935006E09D0 /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2AB27C63935006E09D0 /* ViewModelFactory.swift */; };
 		9C37C2AE27C68E53006E09D0 /* HeartbeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */; };
 		9CD6C98E27C6CBA100BC4A19 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */; };
 		9CDF351F2770C245005E1253 /* HeartbeatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CDF351E2770C245005E1253 /* HeartbeatKit */; };
@@ -34,7 +33,6 @@
 		9C37C2A527C532B1006E09D0 /* HeartbeatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatApp.swift; sourceTree = "<group>"; };
 		9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatView.swift; sourceTree = "<group>"; };
 		9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatStore.swift; sourceTree = "<group>"; };
-		9C37C2AB27C63935006E09D0 /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
 		9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMap.swift; sourceTree = "<group>"; };
 		9C62371C276F96900007F768 /* HeartbeatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HeartbeatKit; path = ../HeartbeatKit; sourceTree = "<group>"; };
 		9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
@@ -85,7 +83,6 @@
 				9C304DE727C7CCAE0036A321 /* ViewStyling.swift */,
 				9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */,
 				9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */,
-				9C37C2AB27C63935006E09D0 /* ViewModelFactory.swift */,
 			);
 			path = Heartbeat;
 			sourceTree = "<group>";
@@ -181,7 +178,6 @@
 				9C37C2A827C532D8006E09D0 /* HeartbeatView.swift in Sources */,
 				9C243AE32736CAF200C97636 /* SceneDelegate.swift in Sources */,
 				9CD6C98E27C6CBA100BC4A19 /* DependencyContainer.swift in Sources */,
-				9C37C2AC27C63935006E09D0 /* ViewModelFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
