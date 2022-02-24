@@ -8,65 +8,97 @@
 import Foundation
 import SwiftUI
 import MapKit
+import HeartbeatKit
 
 struct HeartbeatMap: View {
 
-    @ObservedObject var viewModel: HeartbeatMapViewModel
+    @StateObject var viewModel: HeartbeatMapViewModel
+
+    init(dependencyContainer: DependencyContainer) {
+        self._viewModel = StateObject(wrappedValue: HeartbeatMapViewModel(store: dependencyContainer.store))
+    }
 
     var body: some View {
-        Map(coordinateRegion: $viewModel.region, annotationItems: [viewModel.location]) { location in
-            MapAnnotation(coordinate: location.coordinate, anchorPoint: CGPoint(x: 0.5, y: 0.5)) {
-                Circle()
-                    .stroke(Color.blue, lineWidth: 3.0)
-                    .frame(width: 44, height: 44)
+        VStack {
+            Map(
+                coordinateRegion: $viewModel.heartbeatUpdate.region,
+                annotationItems: [viewModel.heartbeatUpdate]
+            ) { heartbeatUpdate in
+                MapAnnotation(
+                    coordinate: heartbeatUpdate.region.center,
+                    anchorPoint: CGPoint(x: 0.5, y: 0.5)
+                ) {
+                    Circle()
+                        .stroke(Color.blue, lineWidth: 3.0)
+                        .frame(width: 44, height: 44)
+                }
             }
+            .edgesIgnoringSafeArea(.all)
+            Text(viewModel.heartbeatUpdate.locationName)
+            Text("\(viewModel.heartbeatUpdate.timestamp.formatted(.dateTime))")
         }
-        .edgesIgnoringSafeArea(.all)
+        .onAppear {
+            viewModel.startStreamingLocations()
+        }
     }
 }
 
 class HeartbeatMapViewModel: ObservableObject {
 
-    @Published var region = HeartbeatMapViewModel.createCoordinateRegion(
-        latitude: 37.334_900,
-        longitude: -122.009_020
-    )
-
-    @Published var location = HeartbeatLocation(coordinate: CLLocationCoordinate2D(
-        latitude: 37.334_900,
-        longitude: -122.009_020
-    ))
+    @Published var heartbeatUpdate = HeartbeatUpdate.defaultHeartbeatUpdate()
 
     private let store: HeartbeatStore
 
     init(store: HeartbeatStore) {
         self.store = store
-        self.store.startLastHeartbeatStream { [weak self] lastHeartbeat in
-            self?.location = HeartbeatLocation(
-                coordinate: CLLocationCoordinate2D(
-                    latitude: lastHeartbeat.location.latitude,
-                    longitude: lastHeartbeat.location.longitude
-                )
-            )
-
-            self?.region = HeartbeatMapViewModel.createCoordinateRegion(
-                latitude: lastHeartbeat.location.latitude,
-                longitude: lastHeartbeat.location.longitude
-            )
-        }
     }
 
-    private static func createCoordinateRegion(latitude: Double, longitude: Double) -> MKCoordinateRegion {
-        return MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: latitude, longitude: longitude),
-            latitudinalMeters: 50_000,
-            longitudinalMeters: 50_000
-        )
+    public func startStreamingLocations() {
+        self.store.startLastHeartbeatStream { [weak self] lastHeartbeat in
+            self?.heartbeatUpdate = HeartbeatUpdate(heartbeat: lastHeartbeat)
+        }
     }
 }
 
 
-struct HeartbeatLocation: Identifiable {
+struct HeartbeatUpdate: Identifiable {
     let id = UUID()
-    let coordinate: CLLocationCoordinate2D
+    var region: MKCoordinateRegion // var, beacuse we need a mutable for the binding in the map
+    let locationName: String
+    let timestamp: Date
+
+    init(heartbeat: Heartbeat_Heartbeat) {
+        self.region = MKCoordinateRegion(
+            center: CLLocationCoordinate2D(
+                latitude: heartbeat.location.latitude,
+                longitude: heartbeat.location.longitude
+            ),
+            latitudinalMeters: 50_000,
+            longitudinalMeters: 50_000
+        )
+
+        self.locationName = "\(heartbeat.location.city), \(heartbeat.location.region), \(heartbeat.location.country)"
+        self.timestamp = heartbeat.timestamp.date
+    }
+
+    init(region: MKCoordinateRegion, locationName: String, timestamp: Date) {
+        self.region = region
+        self.locationName = locationName
+        self.timestamp = timestamp
+    }
+
+    static func defaultHeartbeatUpdate() -> HeartbeatUpdate {
+        return HeartbeatUpdate(
+            region: MKCoordinateRegion(
+                center: CLLocationCoordinate2D(
+                    latitude: 37.334_900,
+                    longitude: -122.009_020
+                ),
+                latitudinalMeters: 50_000,
+                longitudinalMeters: 50_000
+            ),
+            locationName: "Home",
+            timestamp: Date()
+        )
+    }
 }

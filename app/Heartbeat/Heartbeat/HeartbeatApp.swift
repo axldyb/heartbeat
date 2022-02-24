@@ -14,7 +14,7 @@ struct TestSwiftUIApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HeartbeatView(dependencyContainer: dependencyContainer, viewModel: dependencyContainer.viewModelFactory.createHeartbeatViewModel())
+            HeartbeatView(dependencyContainer: dependencyContainer)
         }
     }
 }

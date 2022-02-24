@@ -12,13 +12,18 @@ import MapKit
 
 struct HeartbeatView: View {
 
-    public let dependencyContainer: DependencyContainer
-
     @StateObject var viewModel: HeartbeatViewModel
+
+    private let dependencyContainer: DependencyContainer
+
+    init(dependencyContainer: DependencyContainer) {
+        self._viewModel = StateObject(wrappedValue: HeartbeatViewModel(store: dependencyContainer.store))
+        self.dependencyContainer = dependencyContainer
+    }
 
     var body: some View {
         VStack {
-            HeartbeatMap(viewModel: dependencyContainer.viewModelFactory.createHeartbeatMapViewModel())
+            HeartbeatMap(dependencyContainer: dependencyContainer)
             Text("Heartbeats: \(viewModel.heartbeatCount)")
                 .padding()
                 .modifier(TitleModifier())
@@ -26,6 +31,9 @@ struct HeartbeatView: View {
                 viewModel.createHeartbeat()
             }
             .buttonStyle(BlueButton())
+        }
+        .onAppear {
+            viewModel.startStreamingHeartbeatCount()
         }
     }
 }
@@ -38,6 +46,9 @@ class HeartbeatViewModel: ObservableObject {
 
     init(store: HeartbeatStore) {
         self.store = store
+    }
+
+    func startStreamingHeartbeatCount() {
         self.store.startHeartbeatCountStream { [weak self] newCount in
             self?.heartbeatCount = newCount
         }
@@ -50,12 +61,11 @@ class HeartbeatViewModel: ObservableObject {
 
 struct HeartbeatView_Previews: PreviewProvider {
 
-
     static var previews: some View {
         let dependencyContainer = PreviewDependencies()
 
         Group {
-            HeartbeatView(dependencyContainer: dependencyContainer, viewModel: dependencyContainer.viewModelFactory.createHeartbeatViewModel())
+            HeartbeatView(dependencyContainer: dependencyContainer)
         }
     }
 }
