@@ -28,7 +28,6 @@ class HeartbeatServiceStore: HeartbeatStore {
     }
 
     func startLastHeartbeatStream(handler: @escaping (Heartbeat_Heartbeat) -> Void) {
-        self.logger.info("----------------- Start new last heartbeat stream")
         heartbeatService.startLastHeartbeatStream { [weak self] lastHeartbeat in
             self?.logger.info("Last heartbeat: \(lastHeartbeat)")
             handler(lastHeartbeat)
