@@ -20,6 +20,7 @@ public class HeartbeatService {
     fileprivate let heartbeatQueue = DispatchQueue(label: "axldyb.Heartbeat")
 
     private var heartbeatCountStream: ServerStreamingCall<Heartbeat_Empty, Heartbeat_HeartbeatCount>?
+    private var lastHeartbeatStream: ServerStreamingCall<Heartbeat_Empty, Heartbeat_Heartbeat>?
 
     public init() {
         logger = Logger(label: "HeartbeatService", factory: StreamLogHandler.standardOutput(label:))
@@ -139,5 +140,38 @@ public extension HeartbeatService {
 
     func stopHeartbeatCountStream() {
         heartbeatCountStream?.cancel(promise: nil)
+    }
+
+    func startLastHeartbeatStream(handler: @escaping (Heartbeat_Heartbeat) -> Void) {
+        if let existingStream = lastHeartbeatStream {
+            existingStream.cancel(promise: nil)
+        }
+
+        heartbeatQueue.async { [weak self] in
+            guard let aSelf = self else {
+                return
+            }
+
+            let data = Heartbeat_Empty()
+            let stream = aSelf.serviceClient.streamLastHeartbeat(data) { lastHeartbeat in
+                DispatchQueue.main.async {
+                    handler(lastHeartbeat)
+                }
+            }
+
+            stream.status.whenFailure { error in
+                self?.logger.error("whenFailure: \(error)")
+            }
+
+            stream.status.whenSuccess{ status in
+                self?.logger.info("whenSuccess: \(status)")
+            }
+
+            aSelf.lastHeartbeatStream = stream
+        }
+    }
+
+    func stopLastHeartbeatStream() {
+        lastHeartbeatStream?.cancel(promise: nil)
     }
 }

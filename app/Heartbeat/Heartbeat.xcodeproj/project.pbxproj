@@ -10,9 +10,15 @@
 		9C243AE12736CAF200C97636 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243AE02736CAF200C97636 /* AppDelegate.swift */; };
 		9C243AE32736CAF200C97636 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243AE22736CAF200C97636 /* SceneDelegate.swift */; };
 		9C243AE52736CAF200C97636 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C243AE42736CAF200C97636 /* ViewController.swift */; };
-		9C243AE82736CAF200C97636 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C243AE62736CAF200C97636 /* Main.storyboard */; };
 		9C243AEA2736CAF400C97636 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C243AE92736CAF400C97636 /* Assets.xcassets */; };
 		9C243AED2736CAF400C97636 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C243AEB2736CAF400C97636 /* LaunchScreen.storyboard */; };
+		9C304DE827C7CCAE0036A321 /* ViewStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C304DE727C7CCAE0036A321 /* ViewStyling.swift */; };
+		9C37C2A627C532B1006E09D0 /* HeartbeatApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A527C532B1006E09D0 /* HeartbeatApp.swift */; };
+		9C37C2A827C532D8006E09D0 /* HeartbeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */; };
+		9C37C2AA27C62C2A006E09D0 /* HeartbeatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */; };
+		9C37C2AC27C63935006E09D0 /* ViewModelFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2AB27C63935006E09D0 /* ViewModelFactory.swift */; };
+		9C37C2AE27C68E53006E09D0 /* HeartbeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */; };
+		9CD6C98E27C6CBA100BC4A19 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */; };
 		9CDF351F2770C245005E1253 /* HeartbeatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CDF351E2770C245005E1253 /* HeartbeatKit */; };
 /* End PBXBuildFile section */
 
@@ -21,11 +27,17 @@
 		9C243AE02736CAF200C97636 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C243AE22736CAF200C97636 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9C243AE42736CAF200C97636 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		9C243AE72736CAF200C97636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9C243AE92736CAF400C97636 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C243AEC2736CAF400C97636 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C243AEE2736CAF400C97636 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C304DE727C7CCAE0036A321 /* ViewStyling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewStyling.swift; sourceTree = "<group>"; };
+		9C37C2A527C532B1006E09D0 /* HeartbeatApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatApp.swift; sourceTree = "<group>"; };
+		9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatView.swift; sourceTree = "<group>"; };
+		9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatStore.swift; sourceTree = "<group>"; };
+		9C37C2AB27C63935006E09D0 /* ViewModelFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelFactory.swift; sourceTree = "<group>"; };
+		9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMap.swift; sourceTree = "<group>"; };
 		9C62371C276F96900007F768 /* HeartbeatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HeartbeatKit; path = ../HeartbeatKit; sourceTree = "<group>"; };
+		9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,10 +76,16 @@
 				9C243AE02736CAF200C97636 /* AppDelegate.swift */,
 				9C243AE22736CAF200C97636 /* SceneDelegate.swift */,
 				9C243AE42736CAF200C97636 /* ViewController.swift */,
-				9C243AE62736CAF200C97636 /* Main.storyboard */,
 				9C243AE92736CAF400C97636 /* Assets.xcassets */,
 				9C243AEB2736CAF400C97636 /* LaunchScreen.storyboard */,
 				9C243AEE2736CAF400C97636 /* Info.plist */,
+				9C37C2A527C532B1006E09D0 /* HeartbeatApp.swift */,
+				9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */,
+				9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */,
+				9C304DE727C7CCAE0036A321 /* ViewStyling.swift */,
+				9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */,
+				9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */,
+				9C37C2AB27C63935006E09D0 /* ViewModelFactory.swift */,
 			);
 			path = Heartbeat;
 			sourceTree = "<group>";
@@ -144,7 +162,6 @@
 			files = (
 				9C243AED2736CAF400C97636 /* LaunchScreen.storyboard in Resources */,
 				9C243AEA2736CAF400C97636 /* Assets.xcassets in Resources */,
-				9C243AE82736CAF200C97636 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,22 +173,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C243AE52736CAF200C97636 /* ViewController.swift in Sources */,
+				9C304DE827C7CCAE0036A321 /* ViewStyling.swift in Sources */,
 				9C243AE12736CAF200C97636 /* AppDelegate.swift in Sources */,
+				9C37C2AE27C68E53006E09D0 /* HeartbeatMap.swift in Sources */,
+				9C37C2AA27C62C2A006E09D0 /* HeartbeatStore.swift in Sources */,
+				9C37C2A627C532B1006E09D0 /* HeartbeatApp.swift in Sources */,
+				9C37C2A827C532D8006E09D0 /* HeartbeatView.swift in Sources */,
 				9C243AE32736CAF200C97636 /* SceneDelegate.swift in Sources */,
+				9CD6C98E27C6CBA100BC4A19 /* DependencyContainer.swift in Sources */,
+				9C37C2AC27C63935006E09D0 /* ViewModelFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		9C243AE62736CAF200C97636 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9C243AE72736CAF200C97636 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		9C243AEB2736CAF400C97636 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -311,7 +327,6 @@
 				INFOPLIST_FILE = Heartbeat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -340,7 +355,6 @@
 				INFOPLIST_FILE = Heartbeat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
