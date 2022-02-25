@@ -43,7 +43,7 @@ struct HeartbeatMap: View {
     }
 }
 
-class HeartbeatMapViewModel: ObservableObject {
+@MainActor class HeartbeatMapViewModel: ObservableObject {
 
     @Published var heartbeatUpdate = HeartbeatUpdate.defaultHeartbeatUpdate()
 

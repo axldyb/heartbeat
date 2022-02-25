@@ -38,7 +38,7 @@ struct HeartbeatView: View {
     }
 }
 
-class HeartbeatViewModel: ObservableObject {
+@MainActor class HeartbeatViewModel: ObservableObject {
 
     @Published var heartbeatCount: Int = 0
 
