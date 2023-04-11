@@ -38,24 +38,35 @@ struct HeartbeatView: View {
     }
 }
 
-@MainActor class HeartbeatViewModel: ObservableObject {
+@MainActor class HeartbeatViewModel: ObservableObject, HeartbeatEventSubscriber {
 
     @Published var heartbeatCount: Int = 0
 
-    private let store: HeartbeatStore
+    private var store: HeartbeatStore
 
     init(store: HeartbeatStore) {
         self.store = store
+        self.store.add(eventSubscriber: self)
+    }
+
+    deinit {
+        store.remove(eventSubscriber: self)
     }
 
     func startStreamingHeartbeatCount() {
-        self.store.startHeartbeatCountStream { [weak self] newCount in
-            self?.heartbeatCount = newCount
-        }
+        store.startHeartbeatStream()
+    }
+
+    func didUpdateHeartbeatCounter(newCount: Int) {
+        heartbeatCount = newCount
+    }
+
+    func didUpdateLastHeartbeat(lastHeartbeat: Heartbeat_Heartbeat) {
+        // Don't care
     }
 
     func createHeartbeat() {
-        self.store.createHeartbeat()
+        store.createHeartbeat()
     }
 }
 

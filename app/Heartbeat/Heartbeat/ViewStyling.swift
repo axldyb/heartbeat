@@ -9,10 +9,12 @@ import SwiftUI
 
 struct TitleModifier: ViewModifier {
 
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     func body(content: Content) -> some View {
         content
             .font(.custom("Arial", size: 40))
-            .foregroundColor(.black)
+            .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }
 

@@ -43,20 +43,31 @@ struct HeartbeatMap: View {
     }
 }
 
-@MainActor class HeartbeatMapViewModel: ObservableObject {
+@MainActor class HeartbeatMapViewModel: ObservableObject, HeartbeatEventSubscriber {
 
     @Published var heartbeatUpdate = HeartbeatUpdate.defaultHeartbeatUpdate()
 
-    private let store: HeartbeatStore
+    private var store: HeartbeatStore
 
     init(store: HeartbeatStore) {
         self.store = store
+        self.store.add(eventSubscriber: self)
     }
 
-    public func startStreamingLocations() {
-        self.store.startLastHeartbeatStream { [weak self] lastHeartbeat in
-            self?.heartbeatUpdate = HeartbeatUpdate(heartbeat: lastHeartbeat)
-        }
+    deinit {
+        store.remove(eventSubscriber: self)
+    }
+
+    func startStreamingLocations() {
+        store.startHeartbeatStream()
+    }
+
+    func didUpdateLastHeartbeat(lastHeartbeat: Heartbeat_Heartbeat) {
+        heartbeatUpdate = HeartbeatUpdate(heartbeat: lastHeartbeat)
+    }
+
+    func didUpdateHeartbeatCounter(newCount: Int) {
+        // don't care
     }
 }
 

@@ -18,7 +18,7 @@
 		9C37C2AA27C62C2A006E09D0 /* HeartbeatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */; };
 		9C37C2AE27C68E53006E09D0 /* HeartbeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */; };
 		9CD6C98E27C6CBA100BC4A19 /* DependencyContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */; };
-		9CDF351F2770C245005E1253 /* HeartbeatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CDF351E2770C245005E1253 /* HeartbeatKit */; };
+		9CD82CFC29E5788100CF8807 /* HeartbeatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD82CFB29E5788100CF8807 /* HeartbeatKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,7 +34,7 @@
 		9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatView.swift; sourceTree = "<group>"; };
 		9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatStore.swift; sourceTree = "<group>"; };
 		9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMap.swift; sourceTree = "<group>"; };
-		9C62371C276F96900007F768 /* HeartbeatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HeartbeatKit; path = ../HeartbeatKit; sourceTree = "<group>"; };
+		9C4A587729E57774006780ED /* HeartbeatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HeartbeatKit; path = ../HeartbeatKit; sourceTree = "<group>"; };
 		9CD6C98D27C6CBA100BC4A19 /* DependencyContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyContainer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -43,7 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9CDF351F2770C245005E1253 /* HeartbeatKit in Frameworks */,
+				9CD82CFC29E5788100CF8807 /* HeartbeatKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,7 +53,7 @@
 		9C243AD42736CAF200C97636 = {
 			isa = PBXGroup;
 			children = (
-				9C62371C276F96900007F768 /* HeartbeatKit */,
+				9CA6B02D28D25917002A000F /* Packages */,
 				9C243ADF2736CAF200C97636 /* Heartbeat */,
 				9C243ADE2736CAF200C97636 /* Products */,
 				9CDF351D2770C245005E1253 /* Frameworks */,
@@ -87,6 +87,14 @@
 			path = Heartbeat;
 			sourceTree = "<group>";
 		};
+		9CA6B02D28D25917002A000F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				9C4A587729E57774006780ED /* HeartbeatKit */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		9CDF351D2770C245005E1253 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,7 +119,7 @@
 			);
 			name = Heartbeat;
 			packageProductDependencies = (
-				9CDF351E2770C245005E1253 /* HeartbeatKit */,
+				9CD82CFB29E5788100CF8807 /* HeartbeatKit */,
 			);
 			productName = Heartbeat;
 			productReference = 9C243ADD2736CAF200C97636 /* Heartbeat.app */;
@@ -391,7 +399,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		9CDF351E2770C245005E1253 /* HeartbeatKit */ = {
+		9CD82CFB29E5788100CF8807 /* HeartbeatKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HeartbeatKit;
 		};

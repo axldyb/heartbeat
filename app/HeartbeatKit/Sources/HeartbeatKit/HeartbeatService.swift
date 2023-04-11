@@ -131,6 +131,7 @@ public extension HeartbeatService {
             }
 
             stream.status.whenSuccess{ status in
+                // whenSuccess: unavailable (14): Transport became inactive
                 self?.logger.info("whenSuccess: \(status)")
             }
 
