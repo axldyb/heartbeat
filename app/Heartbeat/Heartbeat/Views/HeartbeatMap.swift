@@ -27,10 +27,14 @@ struct HeartbeatMap: View {
                 }
                 .edgesIgnoringSafeArea(.all)
                 .onChange(of: heartbeatStore.lastHeartbeat) { newValue in
-                    currentHeartbeatRegion = newValue?.region ?? HeartbeatMap.defaultRegion
+                    withAnimation {
+                        currentHeartbeatRegion = newValue?.region ?? HeartbeatMap.defaultRegion
+                    }
                 }
                 .onAppear {
-                    currentHeartbeatRegion = heartbeat.region
+                    withAnimation {
+                        currentHeartbeatRegion = heartbeat.region
+                    }
                 }
                 Text(heartbeat.locationName)
                 Text("\(heartbeat.timestamp.date.formatted(.dateTime))")
