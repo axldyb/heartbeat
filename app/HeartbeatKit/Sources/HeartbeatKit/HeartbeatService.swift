@@ -132,6 +132,7 @@ public extension HeartbeatService {
 
             stream.status.whenSuccess{ status in
                 // whenSuccess: unavailable (14): Transport became inactive
+                // whenSuccess: deadline exceeded (4): Timed out waiting for an HTTP/2 stream from the connection pool
                 self?.logger.info("whenSuccess: \(status)")
             }
 
