@@ -13,7 +13,7 @@ struct TitleModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .font(.custom("Arial", size: 40))
+            .font(.custom("Arial", size: 32))
             .foregroundColor(colorScheme == .dark ? .white : .black)
     }
 }

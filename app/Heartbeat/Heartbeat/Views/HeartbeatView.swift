@@ -21,6 +21,7 @@ struct HeartbeatView: View {
             Text("Heartbeats: \(heartbeatStore.heartbeatCount)")
                 .padding()
                 .modifier(TitleModifier())
+                .multilineTextAlignment(.center)
 
             Button("Create Heartbeat") {
                 heartbeatStore.createHeartbeat()
