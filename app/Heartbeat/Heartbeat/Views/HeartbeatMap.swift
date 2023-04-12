@@ -23,14 +23,7 @@ struct HeartbeatMap: View {
                     coordinateRegion: $currentHeartbeatRegion,
                     annotationItems: [heartbeat]
                 ) { heartbeatUpdate in
-                    MapAnnotation(
-                        coordinate: heartbeatUpdate.region.center,
-                        anchorPoint: CGPoint(x: 0.5, y: 1.0)
-                    ) {
-                        Image(systemName: "mappin")
-                            .foregroundColor(.blue)
-                            .font(.system(size: 30, weight: .bold))
-                    }
+                    MapMarker(coordinate: heartbeatUpdate.region.center, tint: .blue)
                 }
                 .edgesIgnoringSafeArea(.all)
                 .onChange(of: heartbeatStore.lastHeartbeat) { newValue in
