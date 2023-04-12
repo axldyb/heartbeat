@@ -17,7 +17,7 @@ class HeartbeatStore: ObservableObject {
     @Published public var lastHeartbeat: Heartbeat_Heartbeat? = nil
 
     private let heartbeatService = HeartbeatService()
-    private let logger = Logger(label: "HeartbeatServiceStore", factory: StreamLogHandler.standardOutput(label:))
+    private let logger = Logger(label: "HeartbeatStore", factory: StreamLogHandler.standardOutput(label:))
 
     func startHeartbeatStream() {
         // Are we already streaming?
