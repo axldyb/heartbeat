@@ -14,6 +14,12 @@
 		9C37C2A827C532D8006E09D0 /* HeartbeatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */; };
 		9C37C2AA27C62C2A006E09D0 /* HeartbeatStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */; };
 		9C37C2AE27C68E53006E09D0 /* HeartbeatMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */; };
+		9CCCDBB429EC8B13000B6AE4 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCCDBB329EC8B13000B6AE4 /* MapView.swift */; };
+		9CCCDBB629EC8B4F000B6AE4 /* MapViewAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCCDBB529EC8B4F000B6AE4 /* MapViewAnnotation.swift */; };
+		9CCCDBB829EC8B7A000B6AE4 /* MapKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCCDBB729EC8B7A000B6AE4 /* MapKit+Extensions.swift */; };
+		9CCCDBBA29EC8C1F000B6AE4 /* MapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCCDBB929EC8C1F000B6AE4 /* MapAnnotationView.swift */; };
+		9CCCDBBC29EC8C39000B6AE4 /* MapAnnotationClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCCDBBB29EC8C39000B6AE4 /* MapAnnotationClusterView.swift */; };
+		9CCCDBBE29EC8C59000B6AE4 /* HeartbeatAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CCCDBBD29EC8C59000B6AE4 /* HeartbeatAnnotation.swift */; };
 		9CD82CFC29E5788100CF8807 /* HeartbeatKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CD82CFB29E5788100CF8807 /* HeartbeatKit */; };
 		9CD82D0429E72BCD00CF8807 /* Heartbeat_Heartbeat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD82D0329E72BCD00CF8807 /* Heartbeat_Heartbeat+Extensions.swift */; };
 /* End PBXBuildFile section */
@@ -29,6 +35,12 @@
 		9C37C2A927C62C2A006E09D0 /* HeartbeatStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatStore.swift; sourceTree = "<group>"; };
 		9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatMap.swift; sourceTree = "<group>"; };
 		9C4A587729E57774006780ED /* HeartbeatKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = HeartbeatKit; path = ../HeartbeatKit; sourceTree = "<group>"; };
+		9CCCDBB329EC8B13000B6AE4 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		9CCCDBB529EC8B4F000B6AE4 /* MapViewAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewAnnotation.swift; sourceTree = "<group>"; };
+		9CCCDBB729EC8B7A000B6AE4 /* MapKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapKit+Extensions.swift"; sourceTree = "<group>"; };
+		9CCCDBB929EC8C1F000B6AE4 /* MapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationView.swift; sourceTree = "<group>"; };
+		9CCCDBBB29EC8C39000B6AE4 /* MapAnnotationClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotationClusterView.swift; sourceTree = "<group>"; };
+		9CCCDBBD29EC8C59000B6AE4 /* HeartbeatAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartbeatAnnotation.swift; sourceTree = "<group>"; };
 		9CD82D0329E72BCD00CF8807 /* Heartbeat_Heartbeat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Heartbeat_Heartbeat+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +95,18 @@
 			name = Packages;
 			sourceTree = "<group>";
 		};
+		9CCCDBB229EC8B04000B6AE4 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				9CCCDBB329EC8B13000B6AE4 /* MapView.swift */,
+				9CCCDBB529EC8B4F000B6AE4 /* MapViewAnnotation.swift */,
+				9CCCDBB929EC8C1F000B6AE4 /* MapAnnotationView.swift */,
+				9CCCDBBB29EC8C39000B6AE4 /* MapAnnotationClusterView.swift */,
+				9CCCDBB729EC8B7A000B6AE4 /* MapKit+Extensions.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
 		9CD82CFE29E72B2200CF8807 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -98,6 +122,8 @@
 			children = (
 				9C37C2A727C532D8006E09D0 /* HeartbeatView.swift */,
 				9C37C2AD27C68E53006E09D0 /* HeartbeatMap.swift */,
+				9CCCDBBD29EC8C59000B6AE4 /* HeartbeatAnnotation.swift */,
+				9CCCDBB229EC8B04000B6AE4 /* Map */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -208,12 +234,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CCCDBBA29EC8C1F000B6AE4 /* MapAnnotationView.swift in Sources */,
+				9CCCDBB829EC8B7A000B6AE4 /* MapKit+Extensions.swift in Sources */,
+				9CCCDBB429EC8B13000B6AE4 /* MapView.swift in Sources */,
 				9C304DE827C7CCAE0036A321 /* ViewStyling.swift in Sources */,
 				9C37C2AE27C68E53006E09D0 /* HeartbeatMap.swift in Sources */,
 				9C37C2AA27C62C2A006E09D0 /* HeartbeatStore.swift in Sources */,
 				9CD82D0429E72BCD00CF8807 /* Heartbeat_Heartbeat+Extensions.swift in Sources */,
+				9CCCDBBC29EC8C39000B6AE4 /* MapAnnotationClusterView.swift in Sources */,
 				9C37C2A627C532B1006E09D0 /* HeartbeatApp.swift in Sources */,
+				9CCCDBB629EC8B4F000B6AE4 /* MapViewAnnotation.swift in Sources */,
 				9C37C2A827C532D8006E09D0 /* HeartbeatView.swift in Sources */,
+				9CCCDBBE29EC8C59000B6AE4 /* HeartbeatAnnotation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

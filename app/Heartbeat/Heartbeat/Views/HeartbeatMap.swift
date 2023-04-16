@@ -12,38 +12,46 @@ import HeartbeatKit
 
 struct HeartbeatMap: View {
 
+    /// The heartbeat store to use.
     @EnvironmentObject private var heartbeatStore: HeartbeatStore
 
-    @State private var currentHeartbeatRegion: MKCoordinateRegion = HeartbeatMap.defaultRegion
+    /// The current region to display on the map.
+    @State private var currentHeartbeatRegion: MKCoordinateRegion? = nil
 
     var body: some View {
         VStack {
             if let heartbeat = heartbeatStore.lastHeartbeat {
-                Map(
-                    coordinateRegion: $currentHeartbeatRegion,
-                    annotationItems: [heartbeat]
-                ) { heartbeatUpdate in
-                    MapMarker(coordinate: heartbeatUpdate.region.center, tint: .blue)
-                }
-                .edgesIgnoringSafeArea(.all)
-                .onChange(of: heartbeatStore.lastHeartbeat) { newValue in
-                    withAnimation {
-                        currentHeartbeatRegion = newValue?.region ?? HeartbeatMap.defaultRegion
+                MapView(region: $currentHeartbeatRegion, annotations: heartbeatAnnotations)
+                    .edgesIgnoringSafeArea(.all)
+                    .onChange(of: heartbeatStore.lastHeartbeat) { newValue in
+                        withAnimation {
+                            currentHeartbeatRegion = newValue?.region ?? HeartbeatMap.defaultRegion
+                        }
                     }
-                }
-                .onAppear {
-                    withAnimation {
-                        currentHeartbeatRegion = heartbeat.region
+                    .onAppear {
+                        withAnimation {
+                            currentHeartbeatRegion = heartbeat.region
+                        }
                     }
-                }
+
                 Text(heartbeat.locationName)
-                Text("\(heartbeat.timestamp.date.formatted(.dateTime))")
+                Text("\(heartbeat.timestamp.date.formatted(.dateTime)) (\(heartbeat.timestamp.date.formatted(.relative(presentation: .named))))")
             } else {
                 ProgressView()
             }
         }
     }
 
+    /// The annotations to display on the map.
+    private var heartbeatAnnotations: [HeartbeatAnnotation] {
+        guard let heartbeat = heartbeatStore.lastHeartbeat else {
+            return []
+        }
+
+        return [HeartbeatAnnotation(coordinate: heartbeat.region.center)]
+    }
+
+    /// The default region to display when no heartbeat is available.
     private static var defaultRegion: MKCoordinateRegion {
         return MKCoordinateRegion(
             center: CLLocationCoordinate2D(
