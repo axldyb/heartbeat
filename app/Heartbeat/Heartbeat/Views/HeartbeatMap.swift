@@ -35,7 +35,7 @@ struct HeartbeatMap: View {
                     }
 
                 Text(heartbeat.locationName)
-                Text("\(heartbeat.timestamp.date.formatted(.dateTime)) (\(heartbeat.timestamp.date.formatted(.relative(presentation: .named))))")
+                Text("\(heartbeat.timestamp.date.formatted(.dateTime)) (\(heartbeat.timestamp.date, style: .relative))")
             } else {
                 ProgressView()
             }
