@@ -25,6 +25,9 @@ public class HeartbeatService {
     public init() {
         logger = Logger(label: "HeartbeatService", factory: StreamLogHandler.standardOutput(label:))
 
+        // TODO: To prevent warnings for hanging main thread we need to chnage this to be created on a background thread.
+        // We can have our code running on a worker background thread and post updates on a specified thread (with a default to main).
+        // https://github.com/apple/swift-nio/issues/2223
         group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
         // Configure the channel, we're not using TLS so the connection is `insecure`.
