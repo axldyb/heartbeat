@@ -21,7 +21,7 @@ struct HeartbeatMap: View {
     var body: some View {
         VStack {
             if let heartbeat = heartbeatStore.lastHeartbeat {
-                MapView(region: $currentHeartbeatRegion, annotations: heartbeatAnnotations)
+                MapView(region: $currentHeartbeatRegion, showsUserLocation: false, annotations: heartbeatAnnotations)
                     .edgesIgnoringSafeArea(.all)
                     .onChange(of: heartbeatStore.lastHeartbeat) { newValue in
                         withAnimation {
