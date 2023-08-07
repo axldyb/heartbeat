@@ -8,6 +8,12 @@
 import Foundation
 import MapKit
 
+#if canImport(UIKit)
+import UIKit
+#endif
+
+import SwiftUI
+
 protocol MapViewAnnotation: MKAnnotation {
 
     /**
@@ -19,9 +25,11 @@ protocol MapViewAnnotation: MKAnnotation {
         get
     }
 
+#if os(iOS)
     /**
      The image to display as a glyph in the annotation's view.
      */
+    @available(iOS 13.0, *)
     var glyphImage: UIImage? {
         get
     }
@@ -29,8 +37,27 @@ protocol MapViewAnnotation: MKAnnotation {
     /**
      The tint color of the annotations's view.
      */
+    @available(iOS 13.0, *)
     var tintColor: UIColor? {
         get
     }
+
+#else
+    /**
+     The image to display as a glyph in the annotation's view.
+     */
+    @available(iOS 13.0, *)
+    var glyphImage: NSImage? {
+        get
+    }
+
+    /**
+     The tint color of the annotations's view.
+     */
+    @available(iOS 13.0, *)
+    var tintColor: NSColor? {
+        get
+    }
+#endif
 
 }

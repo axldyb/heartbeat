@@ -5,10 +5,50 @@
 //  Created by Aksel Dybdal on 07/11/2021.
 //
 
-import UIKit
-import SystemConfiguration
+import Foundation
 
-public extension UIDevice {
+#if os(macOS)
+struct Device {
+    let id: String
+    let name: String
+    let os: String
+    let osVersion: String
+    let model: String
+
+    static var current: Device {
+        return Device(
+            id: Device.deviceIdentifier(),
+            name: ProcessInfo.processInfo.hostName,
+            os: "OSX",
+            osVersion: ProcessInfo.processInfo.operatingSystemVersionString,
+            model: Device.modelName
+        )
+    }
+}
+#elseif os(iOS)
+import UIKit
+
+struct Device {
+    let id: String
+    let name: String
+    let os: String
+    let osVersion: String
+    let model: String
+
+    static var current: Device {
+        return Device(
+            id: Device.deviceIdentifier(),
+            name: UIDevice.current.name,
+            os: UIDevice.current.systemName,
+            osVersion: UIDevice.current.systemVersion,
+            model: Device.modelName
+        )
+    }
+}
+#endif
+
+
+extension Device {
 
     static let modelName: String = {
         var systemInfo = utsname()
@@ -21,7 +61,7 @@ public extension UIDevice {
         return identifier
     }()
 
-    func deviceIdentifier() -> String {
+    static func deviceIdentifier() -> String {
         let key = "\(String(describing: Bundle.main.bundleIdentifier ?? "")).deviceIdentifier"
 
         if let deviceIdentifier = Keychain.load(key: key) {

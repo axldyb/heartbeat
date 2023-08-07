@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 
 // https://github.com/sgade/swiftui-mapview
-struct MapView: UIViewRepresentable {
+struct MapView {
 
     // MARK: Properties
     /**
@@ -101,57 +101,6 @@ struct MapView: UIViewRepresentable {
         self._selectedAnnotations = selectedAnnotations
     }
 
-    // MARK: - UIViewRepresentable
-    public func makeCoordinator() -> MapView.Coordinator {
-        return Coordinator(for: self)
-    }
-
-    public func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
-        // create view
-        let mapView = MKMapView()
-        mapView.delegate = context.coordinator
-        // register custom annotation view classes
-        mapView.register(MapAnnotationView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        mapView.register(MapAnnotationClusterView.self,
-                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-
-        // configure initial view state
-        configureView(mapView, context: context)
-
-        return mapView
-    }
-
-    public func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        // configure view update
-        configureView(mapView, context: context)
-    }
-
-    // MARK: - Configuring view state
-    /**
-     Configures the `mapView`'s state according to the current view state.
-     */
-    private func configureView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
-        // basic map configuration
-        mapView.mapType = mapType
-        if let mapRegion = region {
-            let region = mapView.regionThatFits(mapRegion)
-
-            if region.center != mapView.region.center || region.span != mapView.region.span {
-                mapView.setRegion(region, animated: true)
-            }
-        }
-        mapView.isZoomEnabled = isZoomEnabled
-        mapView.isScrollEnabled = isScrollEnabled
-        mapView.isRotateEnabled = isRotateEnabled
-        mapView.showsUserLocation = showsUserLocation
-        mapView.userTrackingMode = userTrackingMode
-
-        // annotation configuration
-        updateAnnotations(in: mapView)
-        updateSelectedAnnotation(in: mapView)
-    }
-
     /**
      Updates the annotation property of the `mapView`.
      Calculates the difference between the current and new states and only executes changes on those diff sets.
@@ -202,6 +151,11 @@ struct MapView: UIViewRepresentable {
     }
 
     // MARK: - Interaction and delegate implementation
+
+    public func makeCoordinator() -> MapView.Coordinator {
+        return Coordinator(for: self)
+    }
+
     public class Coordinator: NSObject, MKMapViewDelegate {
 
         /**
@@ -248,3 +202,106 @@ struct MapView: UIViewRepresentable {
     }
 
 }
+
+#if os(iOS)
+extension MapView: UIViewRepresentable {
+
+    // MARK: - UIViewRepresentable
+
+    public func makeUIView(context: UIViewRepresentableContext<MapView>) -> MKMapView {
+        // create view
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        // register custom annotation view classes
+        mapView.register(MapAnnotationView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(MapAnnotationClusterView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+
+        // configure initial view state
+        configureView(mapView, context: context)
+
+        return mapView
+    }
+
+    public func updateUIView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
+        // configure view update
+        configureView(mapView, context: context)
+    }
+
+    // MARK: - Configuring view state
+    /**
+     Configures the `mapView`'s state according to the current view state.
+     */
+    private func configureView(_ mapView: MKMapView, context: UIViewRepresentableContext<MapView>) {
+        // basic map configuration
+        mapView.mapType = mapType
+        if let mapRegion = region {
+            let region = mapView.regionThatFits(mapRegion)
+
+            if region.center != mapView.region.center || region.span != mapView.region.span {
+                mapView.setRegion(region, animated: true)
+            }
+        }
+        mapView.isZoomEnabled = isZoomEnabled
+        mapView.isScrollEnabled = isScrollEnabled
+        mapView.isRotateEnabled = isRotateEnabled
+        mapView.showsUserLocation = showsUserLocation
+        mapView.userTrackingMode = userTrackingMode
+
+        // annotation configuration
+        updateAnnotations(in: mapView)
+        updateSelectedAnnotation(in: mapView)
+    }
+}
+
+#else
+extension MapView: NSViewRepresentable {
+
+    func makeNSView(context: NSViewRepresentableContext<MapView>) -> MKMapView {
+        // create view
+        let mapView = MKMapView()
+        mapView.delegate = context.coordinator
+        // register custom annotation view classes
+        mapView.register(MapAnnotationView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(MapAnnotationClusterView.self,
+                         forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+
+        // configure initial view state
+        configureView(mapView, context: context)
+
+        return mapView
+    }
+
+    func updateNSView(_ mapView: MKMapView, context: Context) {
+        // configure view update
+        configureView(mapView, context: context)
+    }
+
+    // MARK: - Configuring view state
+    /**
+     Configures the `mapView`'s state according to the current view state.
+     */
+    private func configureView(_ mapView: MKMapView, context: NSViewRepresentableContext<MapView>) {
+        // basic map configuration
+        mapView.mapType = mapType
+        if let mapRegion = region {
+            let region = mapView.regionThatFits(mapRegion)
+
+            if region.center != mapView.region.center || region.span != mapView.region.span {
+                mapView.setRegion(region, animated: true)
+            }
+        }
+        mapView.isZoomEnabled = isZoomEnabled
+        mapView.isScrollEnabled = isScrollEnabled
+        mapView.isRotateEnabled = isRotateEnabled
+        mapView.showsUserLocation = showsUserLocation
+        mapView.userTrackingMode = userTrackingMode
+
+        // annotation configuration
+        updateAnnotations(in: mapView)
+        updateSelectedAnnotation(in: mapView)
+    }
+}
+#endif

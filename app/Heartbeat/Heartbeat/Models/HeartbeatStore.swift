@@ -45,6 +45,11 @@ class HeartbeatStore: ObservableObject {
         heartbeatService.createHeartbeat()
     }
 
+    func reconnect() {
+        stopHeartbeatStream()
+        startHeartbeatStream()
+    }
+
     private func startHeartbeatCountStream() {
         heartbeatService.startHeartbeatCountStream { [weak self] heartbeatCount in
             self?.logger.info("Heartbeats: \(heartbeatCount.count)")

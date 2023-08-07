@@ -23,10 +23,18 @@ struct HeartbeatView: View {
                 .modifier(TitleModifier())
                 .multilineTextAlignment(.center)
 
-            Button("Create Heartbeat") {
-                heartbeatStore.createHeartbeat()
+            HStack {
+                Button("Create Heartbeat") {
+                    heartbeatStore.createHeartbeat()
+                }
+                .buttonStyle(BlueButton())
+
+                Button("Reconnect") {
+                    heartbeatStore.reconnect()
+                }
+                .buttonStyle(BlueButton())
             }
-            .buttonStyle(BlueButton())
+            .padding()
         }
     }
 }

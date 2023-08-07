@@ -8,7 +8,6 @@
 import Foundation
 import GRPC
 import NIO
-import UIKit
 import Logging
 
 public class HeartbeatService {
@@ -62,11 +61,11 @@ public extension HeartbeatService {
         }
 
         let device = Heartbeat_HeartbeatDevice.with { d in
-            d.id = UIDevice.current.deviceIdentifier()
-            d.name = UIDevice.current.name
-            d.os = UIDevice.current.systemName
-            d.osVersion = UIDevice.current.systemVersion
-            d.model = UIDevice.modelName
+            d.id = Device.current.id
+            d.name = Device.current.name
+            d.os = Device.current.os
+            d.osVersion = Device.current.osVersion
+            d.model = Device.current.model
             d.language = Bundle.main.preferredLocalizations.first ?? "<unknown>"
         }
 
@@ -130,14 +129,14 @@ public extension HeartbeatService {
             }
 
             stream.status.whenFailure { error in
-                self?.logger.error("whenFailure: \(error)")
+                self?.logger.error("startHeartbeatCountStream whenFailure: \(error)")
             }
 
             stream.status.whenSuccess{ status in
                 // whenSuccess: unavailable (14): Transport became inactive
                 // whenSuccess: deadline exceeded (4): Timed out waiting for an HTTP/2 stream from the connection pool
                 // whenSuccess: cancelled (1): RPC was cancelled by the client, cause: RPC was cancelled by the client
-                self?.logger.info("whenSuccess: \(status)")
+                self?.logger.info("startHeartbeatCountStream whenSuccess: \(status)")
             }
 
             aSelf.heartbeatCountStream = stream
@@ -166,11 +165,11 @@ public extension HeartbeatService {
             }
 
             stream.status.whenFailure { error in
-                self?.logger.error("whenFailure: \(error)")
+                self?.logger.error("startLastHeartbeatStream whenFailure: \(error)")
             }
 
             stream.status.whenSuccess{ status in
-                self?.logger.info("whenSuccess: \(status)")
+                self?.logger.info("startLastHeartbeatStream whenSuccess: \(status)")
             }
 
             aSelf.lastHeartbeatStream = stream

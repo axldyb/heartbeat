@@ -15,8 +15,11 @@ struct HeartbeatApp: App {
     private let heartbeatStore: HeartbeatStore
 
     init() {
-        UIApplication.shared.isIdleTimerDisabled = true
         heartbeatStore = HeartbeatStore()
+
+#if os(iOS)
+        UIApplication.shared.isIdleTimerDisabled = true
+#endif
     }
 
     var body: some Scene {
